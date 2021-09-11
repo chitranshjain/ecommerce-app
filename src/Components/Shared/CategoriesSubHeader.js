@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import "./HomeCategories.css";
+import "./CategoriesSubHeader.css";
 
-function HomeCategories() {
+function CategoriesSubHeader() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -23,17 +23,13 @@ function HomeCategories() {
   };
 
   return (
-    <div className="category-cards-parent-div">
-      <div className="category-cards-div">
+    <div className="category-subheader-parent-div">
+      <div className="category-subheader-div">
         {categories &&
           categories.map((category) => {
             return (
               <Link to={`/${category.id}`}>
-                <Card className="home-category-card">
-                  <img
-                    src={`https://ecommerceappcj.herokuapp.com/${category.image}`}
-                    alt={category.name}
-                  />
+                <Card className="subheader-category-card">
                   <p>{category.name}</p>
                 </Card>
               </Link>
@@ -44,4 +40,4 @@ function HomeCategories() {
   );
 }
 
-export default HomeCategories;
+export default CategoriesSubHeader;

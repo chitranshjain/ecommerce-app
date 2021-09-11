@@ -1,0 +1,49 @@
+.category-subheader-parent-div {
+    width: 100%;
+    padding: 0px 60px;
+    background-color: #fff;
+    margin-bottom: 6px;
+    z-index: -1;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.category-subheader-div {
+    background-color: #fff;
+    overflow-x: auto;
+    display: flex;
+    flex-wrap: nowrap !important;
+    width: 100%;
+    overflow: auto;
+    align-items: center;
+}
+
+.category-subheader-div a {
+    text-decoration: none !important;
+    color: black !important;
+}
+
+.subheader-category-card {
+    border: none !important;
+    margin: 0 8px !important;
+    width: 120px !important;
+    flex: 0 0 auto;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s ease-in-out;
+}
+
+.subheader-category-card p {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 12px 0;
+    transition: 0.2s ease-in;
+}
+
+.subheader-category-card:hover p {
+    color: #2d46b9;
+    cursor: pointer;
+}
+
+.category-subheader-div::-webkit-scrollbar {
+    height: 5px;
+}

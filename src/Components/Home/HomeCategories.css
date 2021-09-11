@@ -18,6 +18,16 @@
     align-items: center;
 }
 
+.category-cards-div a {
+    text-decoration: none !important;
+    color: black !important;
+    transition: 0.2s ease-out;
+}
+
+.category-cards-div a:hover {
+    color: #2d46b9 !important;
+}
+
 .home-category-card {
     border: none !important;
     margin: 0 12px !important;
@@ -28,10 +38,6 @@
     justify-content: center;
     align-items: center;
     transition: 0.2s ease-in-out;
-}
-
-.home-category-card:hover {
-    border: 1px solid rgba(0, 0, 0, 0.15) !important;
 }
 
 .home-category-card img {

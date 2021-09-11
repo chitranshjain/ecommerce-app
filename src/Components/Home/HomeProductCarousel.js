@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import "./HomeProductCarousel.css";
 
@@ -32,7 +33,9 @@ function HomeProductCarousel() {
                   <h4>{category.name}</h4>
                 </div>
                 <div>
-                  <button>VIEW ALL</button>
+                  <Link to={`/${category.id}`}>
+                    <button>VIEW ALL</button>
+                  </Link>
                 </div>
               </div>
               <hr />
