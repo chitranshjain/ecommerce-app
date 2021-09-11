@@ -1,0 +1,10 @@
+.carousel-image-div {
+    height: 280px;
+    width: 100%;
+}
+
+.carousel-image-div image {
+    height: 280px;
+    width: 100%;
+    object-fit: cover;
+}
