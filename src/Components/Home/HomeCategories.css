@@ -3,6 +3,7 @@
     padding: 10px 120px;
     background-color: #fff;
     margin-bottom: 6px;
+    z-index: -1;
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 

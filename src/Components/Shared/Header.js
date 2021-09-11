@@ -3,7 +3,7 @@ import $ from "jquery";
 import "./Header.css";
 import { RiUser3Line, RiShoppingBagLine } from "react-icons/ri";
 
-import logo from "../Assets/logo.png";
+import logo from "../../Assets/logo.png";
 
 function Header() {
   const toggleNavbar = () => {

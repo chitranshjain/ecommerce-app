@@ -1,12 +1,6 @@
 .header-main-div {
     margin-bottom: 70px;
-    z-index: 999;
     width: 100%;
-}
-
-.header-parent-parent {
-    z-index: 9999;
-    background: brown;
 }
 
 .header-parent-div {
@@ -14,8 +8,9 @@
     width: 100%;
     margin: auto;
     height: 70px;
-    background-color: #fff;
+    background-color: #2d46b9;
     justify-content: space-between;
+    z-index: 9999;
     position: fixed;
     top: 0;
 }

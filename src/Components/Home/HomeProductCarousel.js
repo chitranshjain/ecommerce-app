@@ -42,7 +42,7 @@ function HomeProductCarousel() {
                     category.products.map((product, index) => {
                       if (index < 6) {
                         return (
-                          <Col lg={2}>
+                          <Col lg={2} md={4} sm={6}>
                             <Card className="home-product-card">
                               <img
                                 src={`https://ecommerceappcj.herokuapp.com/${product.image}`}

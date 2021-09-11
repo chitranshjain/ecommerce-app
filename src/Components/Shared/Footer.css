@@ -1,0 +1,39 @@
+.footer-parent-div {
+    margin-top: 4px;
+    padding: 40px 60px;
+    background-color: #172337;
+}
+
+.footer-col {
+    color: #efefef;
+}
+
+.footer-parent-div p {
+    color: #efefef;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.footer-col h4 {
+    font-size: 14px;
+    color: #8c8c8f;
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.footer-col p {
+    margin-bottom: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 20px;
+    transition: 0.1s ease-in;
+}
+
+.footer-col p:hover {
+    color: #acacac;
+    cursor: pointer;
+}
+
+.footer-parent-div hr {
+    color: #8c8c8f;
+}
