@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import CategoryCard from "./CategoryCard";
 
 import "./HomeCategories.css";
 
@@ -29,13 +30,7 @@ function HomeCategories() {
           categories.map((category) => {
             return (
               <Link to={`/${category.id}`}>
-                <Card className="home-category-card">
-                  <img
-                    src={`https://ecommerceappcj.herokuapp.com/${category.image}`}
-                    alt={category.name}
-                  />
-                  <p>{category.name}</p>
-                </Card>
+                <CategoryCard category={category} />
               </Link>
             );
           })}

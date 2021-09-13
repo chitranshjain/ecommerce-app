@@ -41,34 +41,3 @@
 .products-carousel-div {
     padding: 8px;
 }
-
-.home-product-card {
-    padding: 8px;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.home-product-card img {
-    height: 120px;
-    width: 120px;
-    object-fit: contain;
-    margin-bottom: 8px;
-    transition: 0.15s ease-in-out;
-}
-
-.home-product-card:hover img {
-    transform: scale(1.1);
-}
-
-.home-product-card h6 {
-    font-size: 14px !important;
-    font-weight: 600;
-    text-align: center;
-}
-
-.home-product-card p {
-    font-size: 13px;
-    font-weight: 500;
-}

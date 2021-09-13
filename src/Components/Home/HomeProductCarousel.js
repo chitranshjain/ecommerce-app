@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import HomeProductCard from "./HomeProductCard";
 
 import "./HomeProductCarousel.css";
 
@@ -46,14 +47,7 @@ function HomeProductCarousel() {
                       if (index < 6) {
                         return (
                           <Col lg={2} md={4} sm={6}>
-                            <Card className="home-product-card">
-                              <img
-                                src={`https://ecommerceappcj.herokuapp.com/${product.image}`}
-                                alt={product.name}
-                              />
-                              <h6>{product.name}</h6>
-                              <p>From Rs. {product.price} /-</p>
-                            </Card>
+                            <HomeProductCard product={product} />
                           </Col>
                         );
                       } else {

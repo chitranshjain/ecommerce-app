@@ -4,6 +4,7 @@ import axios from "axios";
 import "./CategoryPage.css";
 import CategoriesSubHeader from "../Components/Shared/CategoriesSubHeader";
 import { Card, Col, Form, Row } from "react-bootstrap";
+import ProductCard from "../Components/CategoryPage/ProductCard";
 
 function CategoryPage(props) {
   const categoryId = props.match.params.categoryId;
@@ -83,24 +84,7 @@ function CategoryPage(props) {
                     category.products.map((product) => {
                       return (
                         <Col lg={3}>
-                          <Card className="product-card">
-                            <img
-                              src={`https://ecommerceappcj.herokuapp.com/${product.image}`}
-                              alt={product.name}
-                            />
-                            <h6>{product.name}</h6>
-                            <p>{product.description.substring(0, 40)}...</p>
-                            <p className="product-cost">
-                              Starts from{" "}
-                              <span>
-                                Rs.{" "}
-                                {product.price
-                                  .toString()
-                                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                                /-
-                              </span>
-                            </p>
-                          </Card>
+                          <ProductCard product={product} />
                         </Col>
                       );
                     })}
