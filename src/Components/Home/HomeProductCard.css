@@ -23,9 +23,11 @@
     font-size: 14px !important;
     font-weight: 600;
     text-align: center;
+    color: rgb(0, 0, 0);
 }
 
 .home-product-card p {
     font-size: 13px;
     font-weight: 500;
+    color: rgb(0, 0, 0);
 }
