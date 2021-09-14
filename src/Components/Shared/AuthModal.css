@@ -1,0 +1,146 @@
+.auth-modal-body {
+    padding: 0;
+    border: none;
+}
+
+.auth-modal-row,
+.auth-modal-info-col,
+.auth-modal-form-col {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.modal-content,
+.modal-dialog {
+    border-radius: 0;
+    border: none;
+    width: 650px;
+}
+
+.auth-modal-close-button {
+    position: absolute;
+    right: -40px;
+    top: -24px;
+    font-size: 24px;
+    color: #fff;
+    transition: 0.1s ease;
+}
+
+.auth-modal-close-button:hover {
+    cursor: pointer;
+}
+
+.auth-info-div {
+    height: 500px;
+    background-color: #566fe0;
+    padding: 40px 30px;
+    color: #fff;
+}
+
+.auth-info-div h5 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.auth-info-div p {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 16px;
+}
+
+.auth-info-div img {
+    height: 140px;
+    margin-left: 30px;
+    position: absolute;
+    bottom: 60px;
+}
+
+.auth-form-div {
+    padding: 40px 30px;
+    height: 500px;
+}
+
+.auth-form-div input {
+    border: none !important;
+    font-size: 16px;
+    width: 100%;
+    padding: 8px 8px 8px 0;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+.auth-form-div input:focus {
+    outline: none !important;
+    border-bottom: 2px solid #566fe0 !important;
+}
+
+.auth-form-div input::placeholder {
+    transition: 0.2s ease;
+}
+
+.auth-form-input-div {
+    margin-bottom: 32px;
+}
+
+.auth-form-div input:focus::placeholder {
+    font-size: 12px;
+    position: absolute;
+    top: -2px;
+    transition: 0.2s ease;
+}
+
+.auth-form-row {
+    margin-bottom: 32px !important;
+}
+
+.auth-form-row,
+.auth-form-row .col {
+    margin: 0;
+    padding: 0;
+}
+
+.auth-form-row .col p {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.65);
+    transition: 0.2s ease;
+}
+
+.auth-form-row .col p:hover {
+    color: #566fe0;
+    cursor: pointer;
+}
+
+.auth-form-row .col:nth-child(2) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.password-icon {
+    font-size: 14px;
+    margin-right: 6px;
+}
+
+.auth-form-div button {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    color: #fff;
+    background-color: #fb641b;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+
+.change-mode {
+    margin-top: 120px;
+    text-align: center;
+    font-size: 14px;
+    transition: 0.15s ease;
+    font-weight: 600;
+}
+
+.change-mode:hover {
+    color: #566fe0;
+    cursor: pointer;
+}

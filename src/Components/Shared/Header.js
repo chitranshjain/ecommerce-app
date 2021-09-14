@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import "./Header.css";
 import {
@@ -7,17 +7,39 @@ import {
   RiSearchLine,
   RiHeart3Line,
 } from "react-icons/ri";
+import { ToastContainer } from "react-toastify";
+import { getAuth } from "firebase/auth";
 
 import logo from "../../Assets/logo.png";
 import { Link } from "react-router-dom";
+import AuthModal from "./AuthModal";
 
 function Header() {
   const toggleNavbar = () => {
     $(".header-links-main").toggleClass("show");
   };
 
+  const auth = getAuth();
+  const [authStatus, setAuthStatus] = useState(false);
+  const [authModalShow, setAuthModalShow] = useState(false);
+
+  useEffect(() => {
+    getAuthStatus();
+  }, []);
+
+  const getAuthStatus = () => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setAuthStatus(true);
+      } else {
+        setAuthStatus(false);
+      }
+    });
+  };
+
   return (
     <div className="header-main-div">
+      <ToastContainer position="bottom-center" />
       <div className="header-parent-parent">
         <div className="header-parent-div">
           <div className="header-logo-div">
@@ -43,10 +65,29 @@ function Header() {
                     <div className="dropdown-category">Laptops</div>
                   </div>
                 </div> */}
-                <div className="link-div">
-                  <RiUser3Line className="link-icon" />
-                  <p>Chitransh</p>
-                </div>
+                {authStatus ? (
+                  <div className="link-div">
+                    <RiUser3Line className="link-icon" />
+                    <p>Chitransh</p>
+                  </div>
+                ) : (
+                  <div className="link-div">
+                    <button
+                      onClick={(event) => {
+                        event.preventDefault();
+                        setAuthModalShow(true);
+                      }}
+                    >
+                      Login
+                    </button>
+                    <AuthModal
+                      show={authModalShow}
+                      onHide={() => {
+                        setAuthModalShow(false);
+                      }}
+                    />
+                  </div>
+                )}
                 <div className="link-div">
                   <RiHeart3Line className="link-icon" />
                   <p>Wishlist</p>

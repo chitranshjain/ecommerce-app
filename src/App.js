@@ -4,6 +4,7 @@ import Footer from "./Components/Shared/Footer";
 import Home from "./Core/Home";
 import CategoryPage from "./Core/CategoryPage";
 import ProductPage from "./Core/ProductPage";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (

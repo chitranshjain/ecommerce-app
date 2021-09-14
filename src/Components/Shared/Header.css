@@ -52,7 +52,8 @@
 }
 
 .link-div:hover p,
-.category-div:hover p, .link-div:hover .link-icon {
+.category-div:hover p,
+.link-div:hover .link-icon {
     color: rgb(204, 200, 200) !important;
     cursor: pointer;
 }
@@ -64,7 +65,9 @@
 .link-div {
     transition: 0.2s ease-in;
 }
-.link-div.active, .category-div.active p {
+
+.link-div.active,
+.category-div.active p {
     color: #fff;
 }
 
@@ -125,6 +128,14 @@
 
 .header-search-bar input:focus {
     outline: none !important;
+}
+
+.link-div button {
+    padding: 5px 36px;
+    border: none;
+    background-color: #fff;
+    font-weight: 600;
+    color: #566fe0;
 }
 
 @media screen and (max-width:990px) {
