@@ -45,9 +45,10 @@ function AuthModal(props) {
 
               reactLocalStorage.setObject("loggedInUser", loggedInUser);
 
+              history.push("/");
               props.onHide();
             })
-            .catch((err) => {
+            .catch(() => {
               history.push(`/user/${firebaseId}`);
               props.onHide();
             });
