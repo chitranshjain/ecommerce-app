@@ -5,6 +5,8 @@ import Home from "./Core/Home";
 import CategoryPage from "./Core/CategoryPage";
 import ProductPage from "./Core/ProductPage";
 import "react-toastify/dist/ReactToastify.css";
+import Registration from "./Core/User Pages/Registration";
+import Dashboard from "./Core/User Pages/Dashboard";
 
 function App() {
   return (
@@ -15,6 +17,12 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/:categoryId" exact component={CategoryPage} />
           <Route path="/product/:productId" exact component={ProductPage} />
+          <Route path="/user/:userId" exact component={Dashboard} />
+          <Route
+            path="/user/register/:firebaseId"
+            exact
+            component={Registration}
+          />
         </Switch>
         <Footer />
       </Router>

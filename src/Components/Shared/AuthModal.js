@@ -14,12 +14,16 @@ import {
 
 import "./AuthModal.css";
 import { toast, ToastContainer } from "react-toastify";
+import axios from "axios";
+import { useHistory } from "react-router";
+import { reactLocalStorage } from "reactjs-localstorage";
 
 function AuthModal(props) {
   const [passwordShow, setPasswordShow] = useState(false);
   const [loginMode, setLoginMode] = useState(true);
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const auth = getAuth();
+  const history = useHistory();
 
   const signIn = (event) => {
     event.preventDefault();
@@ -27,7 +31,26 @@ function AuthModal(props) {
       .then((userCredentials) => {
         const user = userCredentials.user;
         if (user.emailVerified) {
-          toast.success("Successfully signed in.");
+          const firebaseId = user.uid;
+          console.log(firebaseId);
+          axios({
+            method: "get",
+            url: `https://ecommerceappcj.herokuapp.com/api/users/firebase/${firebaseId}`,
+          })
+            .then((response) => {
+              const loggedInUser = {
+                firebaseId: firebaseId,
+                user: response.data.user,
+              };
+
+              reactLocalStorage.setObject("loggedInUser", loggedInUser);
+
+              props.onHide();
+            })
+            .catch((err) => {
+              history.push(`/user/${firebaseId}`);
+              props.onHide();
+            });
         } else {
           toast.error("Please verify your email first.");
           signOut(auth);
@@ -49,6 +72,7 @@ function AuthModal(props) {
         sendEmailVerification(auth.currentUser).then(() => {
           toast.success("Successfully signed up, verification email sent!");
           signOut(auth);
+          setLoginMode(true);
         });
       })
       .catch((err) => {
