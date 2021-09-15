@@ -2,10 +2,29 @@ import React from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { IoIosWallet, IoIosPower } from "react-icons/io";
 import { Card, Col, Row } from "react-bootstrap";
+import { getAuth, signOut } from "@firebase/auth";
 
 import "./Sidebar.css";
+import { reactLocalStorage } from "reactjs-localstorage";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router";
 
 function Sidebar() {
+  const auth = getAuth();
+  const history = useHistory();
+
+  const logOut = () => {
+    signOut(auth)
+      .then(() => {
+        reactLocalStorage.remove("loggedInUser");
+        toast.success("Successfully logged out");
+        history.push("/");
+      })
+      .catch(() => {
+        toast.error("An error occurred. Please try again");
+      });
+  };
+
   return (
     <Col lg={3}>
       <Card className="dashboard-greet-card">
@@ -41,7 +60,7 @@ function Sidebar() {
           </Col>
         </Row>
         <hr />
-        <Row className="dashboard-action-row">
+        <Row onClick={logOut} className="dashboard-action-row">
           <Col className="action-icon-col" lg={3}>
             <IoIosPower className="action-icon" />
           </Col>
