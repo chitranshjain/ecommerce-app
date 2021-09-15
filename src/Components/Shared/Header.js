@@ -14,6 +14,7 @@ import logo from "../../Assets/logo.png";
 import { Link, useHistory } from "react-router-dom";
 import AuthModal from "./AuthModal";
 import { reactLocalStorage } from "reactjs-localstorage";
+import axios from "axios";
 
 function Header() {
   const toggleNavbar = () => {
@@ -34,7 +35,19 @@ function Header() {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setAuthStatus(true);
-        setLoggedInUser(reactLocalStorage.getObject("loggedInUser"));
+        const user = reactLocalStorage.getObject("loggedInUser");
+        axios({
+          method: "get",
+          url: `https://ecommerceappcj.herokuapp.com/api/users/${user.user._id}`,
+        }).then((response) => {
+          console.log("Printing in header");
+          console.log(response.data.user);
+          setLoggedInUser(response.data.user);
+          reactLocalStorage.setObject("loggedInUser", {
+            firebaseId: response.data.user.firebaseId,
+            user: response.data.user,
+          });
+        });
       } else {
         setAuthStatus(false);
       }
@@ -70,19 +83,18 @@ function Header() {
                   </div>
                 </div> */}
                 {authStatus ? (
-                  loggedInUser &&
-                  loggedInUser.user && (
+                  loggedInUser && (
                     <div
                       onClick={() => {
-                        history.push(`/user/${loggedInUser.user.id}`);
+                        history.push(`/user/${loggedInUser._id}`);
                       }}
                       className="link-div"
                     >
                       <RiUser3Line className="link-icon" />
                       <p>
-                        {loggedInUser.user.name.substring(
+                        {loggedInUser.name.substring(
                           0,
-                          loggedInUser.user.name.indexOf(" ")
+                          loggedInUser.name.indexOf(" ")
                         )}
                       </p>
                     </div>

@@ -7,7 +7,7 @@ import "./Registration.css";
 import "../../Components/Shared/AuthModal.css";
 import { getAuth } from "@firebase/auth";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { useHistory } from "react-router";
 

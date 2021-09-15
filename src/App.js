@@ -7,6 +7,7 @@ import ProductPage from "./Core/ProductPage";
 import "react-toastify/dist/ReactToastify.css";
 import Registration from "./Core/User Pages/Registration";
 import Dashboard from "./Core/User Pages/Dashboard";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
