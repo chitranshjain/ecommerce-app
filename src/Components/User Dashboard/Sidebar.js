@@ -9,7 +9,7 @@ import { reactLocalStorage } from "reactjs-localstorage";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router";
 
-function Sidebar() {
+function Sidebar(props) {
   const auth = getAuth();
   const history = useHistory();
 
@@ -30,10 +30,7 @@ function Sidebar() {
       <Card className="dashboard-greet-card">
         <Row>
           <Col className="greet-image-col" lg={3}>
-            <img
-              alt="Chitransh Jain"
-              src={`https://ecommerceappcj.herokuapp.com/uploads/images/user/27e69b4c-d899-4536-9a2e-a1ceb8b7b1dd.jpeg`}
-            />
+            <img alt="Chitransh Jain" src={props.image} />
           </Col>
           <Col className="user-greet-col" lg={9}>
             <p>Hello,</p>

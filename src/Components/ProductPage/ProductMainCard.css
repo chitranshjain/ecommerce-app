@@ -108,3 +108,26 @@
     color: rgba(0, 0, 0, 0.75);
     font-size: 14px;
 }
+
+.wishlist-icon {
+    position: relative;
+    left: 95%;
+    font-size: 20px;
+    transition: 0.2s ease-in;
+}
+
+.liked-icon {
+    color: rgb(255, 0, 0);
+}
+
+.wishlist-icon:hover {
+    cursor: pointer;
+}
+
+.liked-icon:hover {
+    color: rgba(0, 0, 0, 0.25);
+}
+
+.unliked-icon:hover {
+    color: rgb(255, 0, 0);
+}

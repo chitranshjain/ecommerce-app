@@ -1,16 +1,105 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { RiShoppingCart2Fill } from "react-icons/ri";
 import { AiFillThunderbolt } from "react-icons/ai";
+import { BsHeart, BsHeartFill } from "react-icons/bs";
 
 import "./ProductMainCard.css";
+import { reactLocalStorage } from "reactjs-localstorage";
 
 function ProductMainCard(props) {
+  const [wishlist, setWishlist] = useState([]);
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    getWishlist();
+    getCart();
+  }, []);
+
+  const getWishlist = () => {
+    setWishlist([]);
+    const wish = reactLocalStorage.getObject("userWishlist");
+    if (wish.wishlist) {
+      setWishlist(wish.wishlist);
+    }
+  };
+
+  const addToWishlist = () => {
+    setWishlist((prev) => {
+      return [...prev, props.product._id];
+    });
+
+    const values = [...wishlist];
+    values.push(props.product._id);
+    const list = {
+      wishlist: values,
+    };
+
+    reactLocalStorage.setObject("userWishlist", list);
+  };
+
+  const removeFromWishlist = () => {
+    let values = [...wishlist];
+    values = values.filter((prod) => prod !== props.product._id);
+    setWishlist(values);
+    const list = {
+      wishlist: values,
+    };
+
+    reactLocalStorage.setObject("userWishlist", list);
+  };
+
+  const getCart = () => {
+    setCart([]);
+    const items = reactLocalStorage.getObject("userCart");
+    if (items.cart) {
+      setCart(items.cart);
+    }
+  };
+
+  const addToCart = () => {
+    setCart((prev) => {
+      return [...prev, props.product._id];
+    });
+
+    const values = [...cart];
+    values.push(props.product._id);
+    const list = {
+      cart: values,
+    };
+
+    reactLocalStorage.setObject("userCart", list);
+  };
+
+  const removeFromCart = () => {
+    let values = [...cart];
+    values = values.filter((prod) => prod !== props.product._id);
+    setCart(values);
+    const list = {
+      cart: values,
+    };
+
+    reactLocalStorage.setObject("userCart", list);
+  };
+
   return (
     <Card className="product-page-card">
       <Row className="product-page-row">
         <Col className="product-image-col" lg={4}>
           <div className="product-image-div">
+            {wishlist &&
+            wishlist.length > 0 &&
+            wishlist.find((prod) => prod === props.product._id) ? (
+              <BsHeartFill
+                onClick={removeFromWishlist}
+                className="liked-icon wishlist-icon"
+              />
+            ) : (
+              <BsHeart
+                onClick={addToWishlist}
+                className="unliked-icon wishlist-icon"
+              />
+            )}
             <img
               src={`https://ecommerceappcj.herokuapp.com/${props.product.image}`}
               alt={props.product.name}
@@ -18,10 +107,19 @@ function ProductMainCard(props) {
           </div>
           <Row>
             <Col className="product-page-button-col cart-btn">
-              <button>
-                <RiShoppingCart2Fill className="icon" />
-                ADD TO CART
-              </button>
+              {cart &&
+              cart.length > 0 &&
+              cart.find((prod) => prod === props.product._id) ? (
+                <button onClick={removeFromCart}>
+                  <RiShoppingCart2Fill className="icon" />
+                  REMOVE FROM CART
+                </button>
+              ) : (
+                <button onClick={addToCart}>
+                  <RiShoppingCart2Fill className="icon" />
+                  ADD TO CART
+                </button>
+              )}
             </Col>
             <Col className="product-page-button-col buy-btn">
               <button>

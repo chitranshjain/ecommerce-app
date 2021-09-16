@@ -98,11 +98,11 @@ function Dashboard(props) {
           data: imageFormData,
         }).then(() => {
           toast.success("Personal details updated successfully!");
-          history.push("/");
+          getUserInfo();
         });
       } else {
         toast.success("Personal details updated successfully!");
-        history.push("/");
+        getUserInfo();
       }
     });
   };
@@ -111,7 +111,7 @@ function Dashboard(props) {
     <div className="dashboard-parent-div">
       <CategoriesSubHeader />
       <Row className="dashboard-parent-row">
-        <Sidebar />
+        <Sidebar image={imagePreview} />
         <Col lg={9}>
           <Card className="dashboard-form-card">
             <h6>Personal Information</h6>

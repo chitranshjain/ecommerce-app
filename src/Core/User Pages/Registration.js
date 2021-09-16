@@ -88,6 +88,8 @@ function Registration(props) {
           };
 
           reactLocalStorage.setObject("loggedInUser", loggedInUser);
+          reactLocalStorage.setObject("userWishist", { wishlist: [] });
+          reactLocalStorage.setObject("userCart", { cart: [] });
 
           history.push("/");
         }
