@@ -15,6 +15,7 @@ import { Link, useHistory } from "react-router-dom";
 import AuthModal from "./AuthModal";
 import { reactLocalStorage } from "reactjs-localstorage";
 import axios from "axios";
+import WishlistSidebar from "./WishlistSidebar";
 
 function Header() {
   const toggleNavbar = () => {
@@ -24,6 +25,7 @@ function Header() {
   const auth = getAuth();
   const [authStatus, setAuthStatus] = useState(false);
   const [authModalShow, setAuthModalShow] = useState(false);
+  const [wishlistSidebarShow, setWishlistSidebarShow] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState();
   const history = useHistory();
 
@@ -40,8 +42,6 @@ function Header() {
           method: "get",
           url: `https://ecommerceappcj.herokuapp.com/api/users/${user.user._id}`,
         }).then((response) => {
-          console.log("Printing in header");
-          console.log(response.data.user);
           setLoggedInUser(response.data.user);
           reactLocalStorage.setObject("loggedInUser", {
             firebaseId: response.data.user.firebaseId,
@@ -57,6 +57,14 @@ function Header() {
   return (
     <div className="header-main-div">
       <ToastContainer position="bottom-center" />
+      {wishlistSidebarShow && (
+        <WishlistSidebar
+          show={wishlistSidebarShow}
+          handleClose={() => {
+            setWishlistSidebarShow(false);
+          }}
+        />
+      )}
       <div className="header-parent-parent">
         <div className="header-parent-div">
           <div className="header-logo-div">
@@ -117,7 +125,12 @@ function Header() {
                     setAuthModalShow(false);
                   }}
                 />
-                <div className="link-div">
+                <div
+                  onClick={() => {
+                    setWishlistSidebarShow((prev) => !prev);
+                  }}
+                  className="link-div"
+                >
                   <RiHeart3Line className="link-icon" />
                   <p>Wishlist</p>
                 </div>
