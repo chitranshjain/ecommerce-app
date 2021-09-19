@@ -16,6 +16,7 @@ import AuthModal from "./AuthModal";
 import { reactLocalStorage } from "reactjs-localstorage";
 import axios from "axios";
 import WishlistSidebar from "./WishlistSidebar";
+import CartSidebar from "./CartSidebar";
 
 function Header() {
   const toggleNavbar = () => {
@@ -26,6 +27,7 @@ function Header() {
   const [authStatus, setAuthStatus] = useState(false);
   const [authModalShow, setAuthModalShow] = useState(false);
   const [wishlistSidebarShow, setWishlistSidebarShow] = useState(false);
+  const [cartSidebarShow, setCartSidebarShow] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState();
   const history = useHistory();
 
@@ -38,16 +40,16 @@ function Header() {
       if (user) {
         setAuthStatus(true);
         const user = reactLocalStorage.getObject("loggedInUser");
-        axios({
-          method: "get",
-          url: `https://ecommerceappcj.herokuapp.com/api/users/${user.user._id}`,
-        }).then((response) => {
-          setLoggedInUser(response.data.user);
-          reactLocalStorage.setObject("loggedInUser", {
-            firebaseId: response.data.user.firebaseId,
-            user: response.data.user,
-          });
-        });
+        // axios({
+        //   method: "get",
+        //   url: `https://ecommerceappcj.herokuapp.com/api/users/${user.user._id}`,
+        // }).then((response) => {
+        //   setLoggedInUser(response.data.user);
+        //   reactLocalStorage.setObject("loggedInUser", {
+        //     firebaseId: response.data.user.firebaseId,
+        //     user: response.data.user,
+        //   });
+        // });
       } else {
         setAuthStatus(false);
       }
@@ -62,6 +64,14 @@ function Header() {
           show={wishlistSidebarShow}
           handleClose={() => {
             setWishlistSidebarShow(false);
+          }}
+        />
+      )}
+      {cartSidebarShow && (
+        <CartSidebar
+          show={cartSidebarShow}
+          handleClose={() => {
+            setCartSidebarShow(false);
           }}
         />
       )}
@@ -134,7 +144,12 @@ function Header() {
                   <RiHeart3Line className="link-icon" />
                   <p>Wishlist</p>
                 </div>
-                <div className="link-div">
+                <div
+                  onClick={() => {
+                    setCartSidebarShow((prev) => !prev);
+                  }}
+                  className="link-div"
+                >
                   <RiShoppingBagLine className="link-icon" />
                   <p>Cart</p>
                 </div>

@@ -6,6 +6,7 @@ import { BsHeart, BsHeartFill } from "react-icons/bs";
 
 import "./ProductMainCard.css";
 import { reactLocalStorage } from "reactjs-localstorage";
+import { toast } from "react-toastify";
 
 function ProductMainCard(props) {
   const [wishlist, setWishlist] = useState([]);
@@ -36,6 +37,7 @@ function ProductMainCard(props) {
     };
 
     reactLocalStorage.setObject("userWishlist", list);
+    toast.success("Added To Wishlist");
   };
 
   const removeFromWishlist = () => {
@@ -47,6 +49,7 @@ function ProductMainCard(props) {
     };
 
     reactLocalStorage.setObject("userWishlist", list);
+    toast.success("Removed From Wishlist");
   };
 
   const getCart = () => {
@@ -68,6 +71,7 @@ function ProductMainCard(props) {
       cart: values,
     };
 
+    toast.success("Added To Cart");
     reactLocalStorage.setObject("userCart", list);
   };
 
@@ -79,6 +83,7 @@ function ProductMainCard(props) {
       cart: values,
     };
 
+    toast.success("Removed From Cart");
     reactLocalStorage.setObject("userCart", list);
   };
 

@@ -4,47 +4,47 @@ import { Card, Col, Offcanvas, Row } from "react-bootstrap";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { RiDeleteBin4Line } from "react-icons/ri";
 
-import "./WishlistSidebar.css";
+import "./CartSidebar.css";
 import { toast } from "react-toastify";
 
-function WishlistSidebar(props) {
-  const [wishlist, setWishlist] = useState();
+function CartSidebar(props) {
   const [cart, setCart] = useState([]);
-  const [wishlistProducts, setWishlistProducts] = useState();
+  const [cartProducts, setCartProducts] = useState();
 
   useEffect(() => {
-    getWishlist();
     getCart();
+    getCartItems();
   }, []);
 
-  const getWishlist = () => {
-    setWishlistProducts([]);
-    const list = reactLocalStorage.getObject("userWishlist");
-    const userWishlist = list.wishlist;
-    setWishlist(list.wishlist);
-    userWishlist &&
-      userWishlist.forEach((productId) => {
+  const getCartItems = () => {
+    setCartProducts([]);
+    const list = reactLocalStorage.getObject("userCart");
+    const userCart = list.cart;
+    setCart(list.cart);
+    userCart &&
+      userCart.forEach((productId) => {
         axios({
           method: "get",
           url: `https://ecommerceappcj.herokuapp.com/api/products/product/${productId}`,
         }).then((response) => {
-          setWishlistProducts((prev) => {
+          setCartProducts((prev) => {
             return [...prev, response.data.product];
           });
         });
       });
   };
 
-  const removeFromWishlist = (productId) => {
-    let values = [...wishlist];
+  const removeFromCart = (productId) => {
+    let values = [...cart];
     values = values.filter((prod) => prod !== productId);
-    setWishlist(values);
+    setCart(values);
     const list = {
-      wishlist: values,
+      cart: values,
     };
 
-    reactLocalStorage.setObject("userWishlist", list);
-    getWishlist();
+    reactLocalStorage.setObject("userCart", list);
+    toast.success("Removed From Cart");
+    getCartItems();
   };
 
   const getCart = () => {
@@ -55,37 +55,21 @@ function WishlistSidebar(props) {
     }
   };
 
-  const addToCart = (productId) => {
-    setCart((prev) => {
-      removeFromWishlist(productId);
-      return [...prev, productId];
-    });
-
-    const values = [...cart];
-    values.push(productId);
-    const list = {
-      cart: values,
-    };
-
-    toast.success("Added To Cart");
-
-    reactLocalStorage.setObject("userCart", list);
-  };
-
   return (
     <Offcanvas
       className="wishlist-canvas"
       show={props.show}
       onHide={props.handleClose}
+      placement="end"
     >
       <Offcanvas.Header closeButton>
         <Offcanvas.Title className="wishlist-canvas-title">
-          Wishlist
+          Cart
         </Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body className="wishlist-offcanvas-body">
-        {wishlistProducts &&
-          wishlistProducts.map((product) => {
+        {cartProducts &&
+          cartProducts.map((product) => {
             return (
               <Card className="wishlist-product-card">
                 <Row className="wishlist-row">
@@ -98,18 +82,10 @@ function WishlistSidebar(props) {
                   <Col className="wishlist-content-col" lg={9}>
                     <h6>{product.name}</h6>
                     <p>Rs. {product.price}/-</p>
-                    <button
-                      onClick={(event) => {
-                        event.preventDefault();
-                        addToCart(product._id);
-                      }}
-                    >
-                      Add to Cart
-                    </button>
+                    <button>Add to Cart</button>
                     <RiDeleteBin4Line
-                      onClick={(event) => {
-                        event.preventDefault();
-                        removeFromWishlist(product._id);
+                      onClick={() => {
+                        removeFromCart(product._id);
                       }}
                       className="wishlist-delete-icon"
                     />
@@ -123,4 +99,4 @@ function WishlistSidebar(props) {
   );
 }
 
-export default WishlistSidebar;
+export default CartSidebar;

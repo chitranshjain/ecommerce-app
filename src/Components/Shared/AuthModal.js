@@ -49,7 +49,7 @@ function AuthModal(props) {
               props.onHide();
             })
             .catch(() => {
-              history.push(`/user/${firebaseId}`);
+              history.push(`/user/register/${firebaseId}`);
               props.onHide();
             });
         } else {

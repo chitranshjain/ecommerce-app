@@ -56,6 +56,7 @@ function Dashboard(props) {
       url: `https://ecommerceappcj.herokuapp.com/api/users/${props.match.params.userId}`,
     }).then((response) => {
       const responseData = response.data.user;
+      console.log(responseData);
       const currentUser = {
         fname: responseData.name.substr(0, responseData.name.indexOf(" ")),
         lname: responseData.name.substr(responseData.name.indexOf(" ") + 1),
