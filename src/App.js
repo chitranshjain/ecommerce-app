@@ -7,7 +7,7 @@ import ProductPage from "./Core/ProductPage";
 import "react-toastify/dist/ReactToastify.css";
 import Registration from "./Core/User Pages/Registration";
 import Dashboard from "./Core/User Pages/Dashboard";
-import { ToastContainer } from "react-toastify";
+import Checkout from "./Core/Checkout/Checkout";
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
         <Header />
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/checkout" exact component={Checkout} />
           <Route path="/:categoryId" exact component={CategoryPage} />
           <Route path="/product/:productId" exact component={ProductPage} />
           <Route path="/user/:userId" exact component={Dashboard} />

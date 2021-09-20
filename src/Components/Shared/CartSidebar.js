@@ -6,6 +6,7 @@ import { RiDeleteBin4Line, RiAddLine, RiSubtractLine } from "react-icons/ri";
 
 import "./CartSidebar.css";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 function CartSidebar(props) {
   const [cart, setCart] = useState([]);
@@ -152,7 +153,9 @@ function CartSidebar(props) {
               );
             })}
         </div>
-        <button>PROCEED TO CHECKOUT</button>
+        <Link to="/checkout">
+          <button>PROCEED TO CHECKOUT</button>
+        </Link>
       </Offcanvas.Body>
     </Offcanvas>
   );
