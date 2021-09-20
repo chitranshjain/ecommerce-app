@@ -62,11 +62,11 @@ function ProductMainCard(props) {
 
   const addToCart = () => {
     setCart((prev) => {
-      return [...prev, props.product._id];
+      return [...prev, { productId: props.product._id, quantity: 1 }];
     });
 
     const values = [...cart];
-    values.push(props.product._id);
+    values.push({ productId: props.product._id, quantity: 1 });
     const list = {
       cart: values,
     };
@@ -77,7 +77,7 @@ function ProductMainCard(props) {
 
   const removeFromCart = () => {
     let values = [...cart];
-    values = values.filter((prod) => prod !== props.product._id);
+    values = values.filter((prod) => prod.productId !== props.product._id);
     setCart(values);
     const list = {
       cart: values,
@@ -114,7 +114,7 @@ function ProductMainCard(props) {
             <Col className="product-page-button-col cart-btn">
               {cart &&
               cart.length > 0 &&
-              cart.find((prod) => prod === props.product._id) ? (
+              cart.find((prod) => prod.productId === props.product._id) ? (
                 <button onClick={removeFromCart}>
                   <RiShoppingCart2Fill className="icon" />
                   REMOVE FROM CART

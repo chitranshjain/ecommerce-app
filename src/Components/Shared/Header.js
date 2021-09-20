@@ -40,16 +40,7 @@ function Header() {
       if (user) {
         setAuthStatus(true);
         const user = reactLocalStorage.getObject("loggedInUser");
-        // axios({
-        //   method: "get",
-        //   url: `https://ecommerceappcj.herokuapp.com/api/users/${user.user._id}`,
-        // }).then((response) => {
-        //   setLoggedInUser(response.data.user);
-        //   reactLocalStorage.setObject("loggedInUser", {
-        //     firebaseId: response.data.user.firebaseId,
-        //     user: response.data.user,
-        //   });
-        // });
+        setLoggedInUser(user.user);
       } else {
         setAuthStatus(false);
       }

@@ -58,11 +58,11 @@ function WishlistSidebar(props) {
   const addToCart = (productId) => {
     setCart((prev) => {
       removeFromWishlist(productId);
-      return [...prev, productId];
+      return [...prev, { productId, quantity: 1 }];
     });
 
     const values = [...cart];
-    values.push(productId);
+    values.push({ productId, quantity: 1 });
     const list = {
       cart: values,
     };

@@ -1,0 +1,121 @@
+.cart-canvas {
+    z-index: 999999;
+}
+
+.cart-canvas-title {
+    font-weight: 600;
+    font-size: 28px;
+}
+
+.cart-product-card {
+    padding: 16px 8px;
+    border-radius: 0;
+    margin-bottom: 8px;
+}
+
+.cart-row,
+.cart-row .col-lg-3,
+.cart-row .col-lg-9 {
+    margin: 0;
+    padding: 0;
+}
+
+.cart-image-col {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.cart-image-col img {
+    height: 85px;
+    width: 80px;
+    object-fit: contain;
+}
+
+.cart-content-col {
+    padding-left: 8px !important;
+}
+
+.cart-content-col h6 {
+    font-weight: 600;
+}
+
+.cart-content-col p {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.65);
+    margin-bottom: 8px;
+}
+
+.cart-content-col button {
+    border: none;
+    font-size: 14px;
+    padding: 6px 12px;
+    background-color: #fb641b;
+    color: #fff;
+}
+
+.cart-delete-icon {
+    position: absolute;
+    right: 16px;
+    bottom: 24px;
+    font-size: 18px;
+    transition: all 0.15s ease;
+}
+
+.cart-delete-icon:hover {
+    color: #566fe0;
+    cursor: pointer;
+}
+
+.cart-items-list {
+    height: 76vh;
+    overflow-y: scroll;
+}
+
+.cart-items-list::-webkit-scrollbar {
+    width: 5px !important;
+    height: 2px !important;
+    border-radius: 16px !important;
+}
+
+.cart-items-list::-webkit-scrollbar-track {
+    background-color: rgb(255, 255, 255) !important;
+}
+
+.cart-items-list::-webkit-scrollbar-thumb {
+    background-color: rgb(218, 218, 218) !important;
+}
+
+.cart-items-list::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(150, 150, 150) !important;
+}
+
+.cart-product-card-row,
+.cart-product-card-col {
+    margin: 0;
+    padding: 0;
+}
+
+.cart-product-card-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+
+.cart-quantity-button {
+    transition: 0.1s ease;
+}
+
+.cart-quantity-button:hover {
+    cursor: pointer;
+    color: #566fe0;
+}
+
+.cart-offcanvas-body button {
+    margin-top: 16px;
+    width: 100%;
+    background-color: #fb641b;
+    border: none;
+    padding: 14px 0;
+    color: #fff;
+    font-weight: 600;
+}
