@@ -29,11 +29,11 @@
 }
 
 .product-page-button-col button {
-    width: 100%;
+    width: 100% !important;
     padding: 16px 0;
     font-size: 16px;
     font-weight: 600;
-    color: white;
+    color: white !important;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,6 +42,16 @@
 .product-page-button-col button .icon {
     margin-right: 8px;
     font-size: 18px;
+    color: white;
+}
+
+.dummy-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.dummy-link:hover {
+    color: inherit;
 }
 
 .cart-btn button {

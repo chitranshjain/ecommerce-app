@@ -153,7 +153,7 @@ function CartSidebar(props) {
               );
             })}
         </div>
-        <Link to="/checkout">
+        <Link onClick={props.handleClose} to="/checkout">
           <button>PROCEED TO CHECKOUT</button>
         </Link>
       </Offcanvas.Body>

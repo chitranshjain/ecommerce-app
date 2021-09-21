@@ -7,6 +7,7 @@ import { BsHeart, BsHeartFill } from "react-icons/bs";
 import "./ProductMainCard.css";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 function ProductMainCard(props) {
   const [wishlist, setWishlist] = useState([]);
@@ -128,7 +129,12 @@ function ProductMainCard(props) {
             </Col>
             <Col className="product-page-button-col buy-btn">
               <button>
-                <AiFillThunderbolt className="icon" /> BUY NOW
+                <Link
+                  className="dummy-link"
+                  to={`/checkout/${props.product._id}`}
+                >
+                  <AiFillThunderbolt className="icon" /> BUY NOW
+                </Link>
               </button>
             </Col>
           </Row>

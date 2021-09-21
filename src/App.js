@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Registration from "./Core/User Pages/Registration";
 import Dashboard from "./Core/User Pages/Dashboard";
 import Checkout from "./Core/Checkout/Checkout";
+import BuyNow from "./Core/Checkout/BuyNow";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/checkout" exact component={Checkout} />
+          <Route path="/checkout/:productId" exact component={BuyNow} />
           <Route path="/:categoryId" exact component={CategoryPage} />
           <Route path="/product/:productId" exact component={ProductPage} />
           <Route path="/user/:userId" exact component={Dashboard} />
