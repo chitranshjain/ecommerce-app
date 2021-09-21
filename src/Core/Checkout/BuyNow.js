@@ -4,10 +4,27 @@ import { toast } from "react-toastify";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { Card, Col, Row } from "react-bootstrap";
 import { RiAddLine, RiSubtractLine } from "react-icons/ri";
+import { useHistory } from "react-router";
 
 function BuyNow(props) {
   const [product, setProduct] = useState();
   const [user, setUser] = useState();
+  const history = useHistory();
+  const weekday = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+  const month = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
   useEffect(() => {
     getProduct();
@@ -55,6 +72,77 @@ function BuyNow(props) {
     setProduct(values);
   };
 
+  const placeOrder = () => {
+    return axios({
+      method: "post",
+      url: "https://ecommerce-payment-gateway.herokuapp.com/api/",
+      data: {
+        amount: parseInt(product.price) * parseInt(product.quantity) * 100,
+      },
+    }).then((response) => {
+      if (response.status === 200) {
+        return response.data.order;
+      } else {
+        toast.error("Payment failed");
+      }
+    });
+  };
+
+  const storeOrder = () => {
+    let date = new Date();
+    const day = weekday[date.getDay()];
+    axios({
+      method: "post",
+      url: "https://ecommerceappcj.herokuapp.com/api/orders",
+      data: {
+        userId: user._id,
+        orderAmount: product.price * product.quantity,
+        status: "placed",
+        orderedAt: `${day}, ${date.getDate()} ${
+          month[date.getMonth()]
+        } ${date.getFullYear()}`,
+        shippedAt: "Not yet shipped",
+        deliveredAt: "Not yet delivered",
+        products: [
+          {
+            productId: props.match.params.productId,
+            quantity: product.quantity,
+            total: product.quantity * product.price,
+          },
+        ],
+      },
+    }).then(() => {
+      toast.success("Order placed successfully!");
+      history.push("/");
+    });
+  };
+
+  const paymentHandler = async () => {
+    const getToken = () => {
+      placeOrder().then((data) => {
+        const options = {
+          key: "rzp_test_4ejoQixs8cAUSa",
+          name: "MERN Ecommerce",
+          description: "Thank You for shopping with us.",
+          currency: "INR",
+          order_id: data.id,
+          handler: async (response) => {
+            // await completeBooking(response.razorpay_payment_id);
+            // console.log(response.razorpay_payment_id);
+            storeOrder();
+          },
+          theme: {
+            color: "#f1bc19",
+          },
+        };
+        const rzp1 = new window.Razorpay(options);
+        rzp1.open();
+      });
+    };
+
+    await getToken();
+  };
+
   return (
     <div className="checkout-parent-div">
       {product && (
@@ -97,7 +185,7 @@ function BuyNow(props) {
                   </Col>
                 </Row>
               </Card>
-              <button>PROCEED TO PAY</button>
+              <button onClick={paymentHandler}>PROCEED TO PAY</button>
             </Card>
           </Col>
           <Col className="checkout-main-cols" lg={3}>
