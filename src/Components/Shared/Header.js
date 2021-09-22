@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import $ from "jquery";
 import "./Header.css";
 import {
@@ -8,45 +8,21 @@ import {
   RiHeart3Line,
 } from "react-icons/ri";
 import { ToastContainer } from "react-toastify";
-import { getAuth } from "firebase/auth";
 
 import logo from "../../Assets/logo.png";
 import { Link, useHistory } from "react-router-dom";
 import AuthModal from "./AuthModal";
-import { reactLocalStorage } from "reactjs-localstorage";
-import axios from "axios";
 import WishlistSidebar from "./WishlistSidebar";
 import CartSidebar from "./CartSidebar";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 function Header() {
-  const toggleNavbar = () => {
-    $(".header-links-main").toggleClass("show");
-  };
-
-  const auth = getAuth();
-  const [authStatus, setAuthStatus] = useState(false);
+  const { authStatus, userDetails } = useContext(AuthContext);
   const [authModalShow, setAuthModalShow] = useState(false);
   const [wishlistSidebarShow, setWishlistSidebarShow] = useState(false);
   const [cartSidebarShow, setCartSidebarShow] = useState(false);
-  const [loggedInUser, setLoggedInUser] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const history = useHistory();
-
-  useEffect(() => {
-    getAuthStatus();
-  }, []);
-
-  const getAuthStatus = () => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        setAuthStatus(true);
-        const user = reactLocalStorage.getObject("loggedInUser");
-        setLoggedInUser(user.user);
-      } else {
-        setAuthStatus(false);
-      }
-    });
-  };
 
   const handleChange = (event) => {
     const { value } = event.target;
@@ -100,31 +76,17 @@ function Header() {
           </div>
           <div className="header-links-div">
             <div>
-              <div onClick={toggleNavbar} className="hamburger-div"></div>
               <div className="header-links-main">
-                {/* <div className="links-div category-div">
-                  <p>Categories</p>
-                  <div className="links-dropdown">
-                    <div className="dropdown-category">Smartphones</div>
-                    <div className="dropdown-category">Headphones</div>
-                    <div className="dropdown-category">Laptops</div>
-                  </div>
-                </div> */}
                 {authStatus ? (
-                  loggedInUser && (
+                  userDetails && (
                     <div
                       onClick={() => {
-                        history.push(`/user/${loggedInUser._id}`);
+                        history.push(`/user/${userDetails._id}`);
                       }}
                       className="link-div"
                     >
                       <RiUser3Line className="link-icon" />
-                      <p>
-                        {loggedInUser.name.substring(
-                          0,
-                          loggedInUser.name.indexOf(" ")
-                        )}
-                      </p>
+                      <p>{userDetails.fname}</p>
                     </div>
                   )
                 ) : (

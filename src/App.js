@@ -11,30 +11,33 @@ import Checkout from "./Core/Checkout/Checkout";
 import BuyNow from "./Core/Checkout/BuyNow";
 import Orders from "./Core/User Pages/Orders";
 import SearchPage from "./Core/SearchPage";
+import { AuthProvider } from "./Contexts/AuthContext";
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Header />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/checkout" exact component={Checkout} />
-          <Route path="/orders" exact component={Orders} />
-          <Route path="/search/:query" exact component={SearchPage} />
-          <Route path="/checkout/:productId" exact component={BuyNow} />
-          <Route path="/:categoryId" exact component={CategoryPage} />
-          <Route path="/product/:productId" exact component={ProductPage} />
-          <Route path="/user/:userId" exact component={Dashboard} />
-          <Route
-            path="/user/register/:firebaseId"
-            exact
-            component={Registration}
-          />
-        </Switch>
-        <Footer />
-      </Router>
-    </div>
+    <AuthProvider>
+      <div className="App">
+        <Router>
+          <Header />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/checkout" exact component={Checkout} />
+            <Route path="/orders" exact component={Orders} />
+            <Route path="/search/:query" exact component={SearchPage} />
+            <Route path="/checkout/:productId" exact component={BuyNow} />
+            <Route path="/:categoryId" exact component={CategoryPage} />
+            <Route path="/product/:productId" exact component={ProductPage} />
+            <Route path="/user/:userId" exact component={Dashboard} />
+            <Route
+              path="/user/register/:firebaseId"
+              exact
+              component={Registration}
+            />
+          </Switch>
+          <Footer />
+        </Router>
+      </div>
+    </AuthProvider>
   );
 }
 

@@ -1,76 +1,13 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Card, Col, Offcanvas, Row } from "react-bootstrap";
-import { reactLocalStorage } from "reactjs-localstorage";
 import { RiDeleteBin4Line } from "react-icons/ri";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 import "./WishlistSidebar.css";
-import { toast } from "react-toastify";
 
 function WishlistSidebar(props) {
-  const [wishlist, setWishlist] = useState();
-  const [cart, setCart] = useState([]);
-  const [wishlistProducts, setWishlistProducts] = useState();
-
-  useEffect(() => {
-    getWishlist();
-    getCart();
-  }, []);
-
-  const getWishlist = () => {
-    setWishlistProducts([]);
-    const list = reactLocalStorage.getObject("userWishlist");
-    const userWishlist = list.wishlist;
-    setWishlist(list.wishlist);
-    userWishlist &&
-      userWishlist.forEach((productId) => {
-        axios({
-          method: "get",
-          url: `https://ecommerceappcj.herokuapp.com/api/products/product/${productId}`,
-        }).then((response) => {
-          setWishlistProducts((prev) => {
-            return [...prev, response.data.product];
-          });
-        });
-      });
-  };
-
-  const removeFromWishlist = (productId) => {
-    let values = [...wishlist];
-    values = values.filter((prod) => prod !== productId);
-    setWishlist(values);
-    const list = {
-      wishlist: values,
-    };
-
-    reactLocalStorage.setObject("userWishlist", list);
-    getWishlist();
-  };
-
-  const getCart = () => {
-    setCart([]);
-    const items = reactLocalStorage.getObject("userCart");
-    if (items.cart) {
-      setCart(items.cart);
-    }
-  };
-
-  const addToCart = (productId) => {
-    setCart((prev) => {
-      removeFromWishlist(productId);
-      return [...prev, { productId, quantity: 1 }];
-    });
-
-    const values = [...cart];
-    values.push({ productId, quantity: 1 });
-    const list = {
-      cart: values,
-    };
-
-    toast.success("Added To Cart");
-
-    reactLocalStorage.setObject("userCart", list);
-  };
+  const { wishlistProducts, addToCart, removeFromWishlist } =
+    useContext(AuthContext);
 
   return (
     <Offcanvas

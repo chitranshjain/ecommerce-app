@@ -1,92 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { RiShoppingCart2Fill } from "react-icons/ri";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 
 import "./ProductMainCard.css";
-import { reactLocalStorage } from "reactjs-localstorage";
-import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 function ProductMainCard(props) {
-  const [wishlist, setWishlist] = useState([]);
-  const [cart, setCart] = useState([]);
-
-  useEffect(() => {
-    getWishlist();
-    getCart();
-  }, []);
-
-  const getWishlist = () => {
-    setWishlist([]);
-    const wish = reactLocalStorage.getObject("userWishlist");
-    if (wish.wishlist) {
-      setWishlist(wish.wishlist);
-    }
-  };
-
-  const addToWishlist = () => {
-    setWishlist((prev) => {
-      return [...prev, props.product._id];
-    });
-
-    const values = [...wishlist];
-    values.push(props.product._id);
-    const list = {
-      wishlist: values,
-    };
-
-    reactLocalStorage.setObject("userWishlist", list);
-    toast.success("Added To Wishlist");
-  };
-
-  const removeFromWishlist = () => {
-    let values = [...wishlist];
-    values = values.filter((prod) => prod !== props.product._id);
-    setWishlist(values);
-    const list = {
-      wishlist: values,
-    };
-
-    reactLocalStorage.setObject("userWishlist", list);
-    toast.success("Removed From Wishlist");
-  };
-
-  const getCart = () => {
-    setCart([]);
-    const items = reactLocalStorage.getObject("userCart");
-    if (items.cart) {
-      setCart(items.cart);
-    }
-  };
-
-  const addToCart = () => {
-    setCart((prev) => {
-      return [...prev, { productId: props.product._id, quantity: 1 }];
-    });
-
-    const values = [...cart];
-    values.push({ productId: props.product._id, quantity: 1 });
-    const list = {
-      cart: values,
-    };
-
-    toast.success("Added To Cart");
-    reactLocalStorage.setObject("userCart", list);
-  };
-
-  const removeFromCart = () => {
-    let values = [...cart];
-    values = values.filter((prod) => prod.productId !== props.product._id);
-    setCart(values);
-    const list = {
-      cart: values,
-    };
-
-    toast.success("Removed From Cart");
-    reactLocalStorage.setObject("userCart", list);
-  };
+  const {
+    wishlist,
+    cart,
+    addToWishlist,
+    removeFromWishlist,
+    addToCart,
+    removeFromCart,
+  } = useContext(AuthContext);
 
   return (
     <Card className="product-page-card">
@@ -97,12 +27,18 @@ function ProductMainCard(props) {
             wishlist.length > 0 &&
             wishlist.find((prod) => prod === props.product._id) ? (
               <BsHeartFill
-                onClick={removeFromWishlist}
+                onClick={(e) => {
+                  e.preventDefault();
+                  removeFromWishlist(props.product._id);
+                }}
                 className="liked-icon wishlist-icon"
               />
             ) : (
               <BsHeart
-                onClick={addToWishlist}
+                onClick={(e) => {
+                  e.preventDefault();
+                  addToWishlist(props.product._id);
+                }}
                 className="unliked-icon wishlist-icon"
               />
             )}
@@ -116,12 +52,22 @@ function ProductMainCard(props) {
               {cart &&
               cart.length > 0 &&
               cart.find((prod) => prod.productId === props.product._id) ? (
-                <button onClick={removeFromCart}>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    removeFromCart(props.product._id);
+                  }}
+                >
                   <RiShoppingCart2Fill className="icon" />
                   REMOVE FROM CART
                 </button>
               ) : (
-                <button onClick={addToCart}>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addToCart(props.product._id);
+                  }}
+                >
                   <RiShoppingCart2Fill className="icon" />
                   ADD TO CART
                 </button>
