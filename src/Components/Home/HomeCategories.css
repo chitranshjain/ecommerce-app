@@ -17,3 +17,9 @@
     overflow: auto;
     align-items: center;
 }
+
+@media screen and (max-width: 990px) {
+    .category-cards-parent-div {
+        padding: 10px 40px;
+    }
+}

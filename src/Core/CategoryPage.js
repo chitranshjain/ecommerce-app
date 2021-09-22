@@ -83,7 +83,7 @@ function CategoryPage(props) {
                     category.products &&
                     category.products.map((product) => {
                       return (
-                        <Col lg={3}>
+                        <Col lg={3} md={4} sm={6} xs={12}>
                           <ProductCard product={product} />
                         </Col>
                       );

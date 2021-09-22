@@ -31,44 +31,66 @@ function Orders() {
             return (
               <Card className="order-card">
                 <Row className="order-card-row">
-                  <Col>
+                  <Col lg={6} sm={12}>
                     <Row className="order-details-row">
-                      <Col>Order ID </Col>
-                      <Col>{order._id}</Col>
+                      <Col lg={6} md={6} sm={6} xs={6}>
+                        Order ID{" "}
+                      </Col>
+                      <Col lg={6} md={6} sm={6} xs={6}>
+                        {order._id}
+                      </Col>
                     </Row>
                   </Col>
-                  <Col>
+                  <Col lg={6} sm={12} xs={12}>
                     <Row className="order-details-row">
-                      <Col>Order Date </Col>
-                      <Col>{order.orderedAt}</Col>
-                    </Row>
-                  </Col>
-                </Row>
-                <Row className="order-card-row">
-                  <Col>
-                    <Row className="order-details-row">
-                      <Col>Shipping Date </Col>
-                      <Col>{order.shippedAt}</Col>
-                    </Row>
-                  </Col>
-                  <Col>
-                    <Row className="order-details-row">
-                      <Col>Delivery Date </Col>
-                      <Col>{order.deliveredAt}</Col>
+                      <Col lg={6} md={6} sm={6} xs={6}>
+                        Order Date{" "}
+                      </Col>
+                      <Col lg={6} md={6} sm={6} xs={6}>
+                        {order.orderedAt}
+                      </Col>
                     </Row>
                   </Col>
                 </Row>
                 <Row className="order-card-row">
-                  <Col>
+                  <Col lg={6} sm={12} xs={12}>
                     <Row className="order-details-row">
-                      <Col>Order Amount </Col>
-                      <Col>{order.orderAmount}</Col>
+                      <Col lg={6} md={6} sm={6} xs={6}>
+                        Shipping Date{" "}
+                      </Col>
+                      <Col lg={6} md={6} sm={6} xs={6}>
+                        {order.shippedAt}
+                      </Col>
                     </Row>
                   </Col>
-                  <Col>
+                  <Col lg={6} sm={12} xs={12}>
                     <Row className="order-details-row">
-                      <Col>Order Status </Col>
-                      <Col>
+                      <Col lg={6} md={6} sm={6} xs={6}>
+                        Delivery Date{" "}
+                      </Col>
+                      <Col lg={6} md={6} sm={6} xs={6}>
+                        {order.deliveredAt}
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
+                <Row className="order-card-row">
+                  <Col lg={6} sm={12} xs={12}>
+                    <Row className="order-details-row">
+                      <Col lg={6} md={6} sm={6} xs={6}>
+                        Order Amount{" "}
+                      </Col>
+                      <Col lg={6} md={6} sm={6} xs={6}>
+                        {order.orderAmount}
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col lg={6} sm={12} xs={12}>
+                    <Row className="order-details-row">
+                      <Col lg={6} md={6} sm={6} xs={6}>
+                        Order Status{" "}
+                      </Col>
+                      <Col lg={6} md={6} sm={6} xs={6}>
                         {order.status === "placed"
                           ? "Placed"
                           : order.status === "shipped"
@@ -83,22 +105,22 @@ function Orders() {
                 <hr />
 
                 <Row className="order-card-product-row">
-                  <Col lg={9}>
+                  <Col lg={9} md={6} sm={9} xs={9}>
                     <p>
                       <strong>Product Name</strong>
                     </p>
                   </Col>
-                  <Col lg={1}>
+                  <Col lg={1} md={2} sm={3} xs={3}>
                     <p>
                       <strong>Quantity</strong>
                     </p>
                   </Col>
-                  <Col lg={1}>
+                  <Col className="hidden-sm hidden-xs" lg={1} md={2} sm={0} xs={0}>
                     <p>
                       <strong>Price</strong>
                     </p>
                   </Col>
-                  <Col lg={1}>
+                  <Col className="hidden-sm hidden-xs" lg={1} md={2} sm={0} xs={0}>
                     <p>
                       <strong>Total Cost</strong>
                     </p>
@@ -108,16 +130,16 @@ function Orders() {
                   order.products.map((prod) => {
                     return (
                       <Row className="order-card-product-row">
-                        <Col lg={9}>
+                        <Col lg={9} md={6} sm={9} xs={9}>
                           <p>{prod.productId.name}</p>
                         </Col>
-                        <Col lg={1}>
+                        <Col lg={1} md={2} sm={3} xs={3}>
                           <p>{prod.quantity}</p>
                         </Col>
-                        <Col lg={1}>
+                        <Col className="hidden-sm hidden-xs" lg={1} md={2} sm={0} xs={0}>
                           <p>Rs. {prod.productId.price}</p>
                         </Col>
-                        <Col lg={1}>
+                        <Col className="hidden-sm hidden-xs" lg={1} md={2} sm={0} xs={0}>
                           <p>Rs. {prod.total}</p>
                         </Col>
                       </Row>

@@ -48,7 +48,7 @@ function ProductMainCard(props) {
             />
           </div>
           <Row>
-            <Col className="product-page-button-col cart-btn">
+            <Col sm={12} className="product-page-button-col cart-btn">
               {cart &&
               cart.length > 0 &&
               cart.find((prod) => prod.productId === props.product._id) ? (
@@ -73,7 +73,7 @@ function ProductMainCard(props) {
                 </button>
               )}
             </Col>
-            <Col className="product-page-button-col buy-btn">
+            <Col sm={12} className="product-page-button-col buy-btn">
               <button>
                 <Link
                   className="dummy-link"

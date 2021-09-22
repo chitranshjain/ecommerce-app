@@ -47,3 +47,9 @@
 .category-subheader-div::-webkit-scrollbar {
     height: 5px;
 }
+
+@media screen and (max-width: 990px) {
+    .category-subheader-parent-div {
+        padding: 0px 12px;
+    }
+}
