@@ -53,6 +53,7 @@ export const AuthProvider = (props) => {
         city: responseData.city,
         pin: responseData.pin,
         state: responseData.state,
+        id: responseData._id,
       };
       setUserImagePreview(
         `https://ecommerceappcj.herokuapp.com/${responseData.image}`
@@ -230,6 +231,7 @@ export const AuthProvider = (props) => {
         getWishlist,
         removeFromWishlist,
         addToWishlist,
+        setUserDetails
       }}
     >
       {props.children}

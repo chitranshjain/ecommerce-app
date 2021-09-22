@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Card, Col, Form, Row } from "react-bootstrap";
 import CategoriesSubHeader from "../../Components/Shared/CategoriesSubHeader";
 
@@ -9,24 +9,15 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { FaCamera } from "react-icons/fa";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 function Dashboard(props) {
-  const [user, setUser] = useState({
-    fname: "",
-    lname: "",
-    email: "",
-    phone: "",
-    address: "",
-    city: "",
-    pin: "",
-    state: "",
-  });
-
-  const [imagePreview, setImagePreview] = useState("");
+  const { userDetails, userImagePreview, getUserDetails, setUserDetails } =
+    useContext(AuthContext);
+  const [imagePreview, setImagePreview] = useState(userImagePreview);
   const [image, setImage] = useState(null);
   const imageButtonRef = useRef();
   const types = ["image/png", "image/jpeg", "image/jpg"];
-  const history = useHistory();
 
   function handleImageChange(event) {
     let selectedFile = event.target.files[0];
@@ -41,53 +32,24 @@ function Dashboard(props) {
   const handleChange = (event) => {
     event.preventDefault();
     const { name, value } = event.target;
-    setUser((prev) => {
+    setUserDetails((prev) => {
       return { ...prev, [name]: value };
-    });
-  };
-
-  useEffect(() => {
-    getUserInfo();
-  }, []);
-
-  const getUserInfo = () => {
-    axios({
-      method: "get",
-      url: `https://ecommerceappcj.herokuapp.com/api/users/${props.match.params.userId}`,
-    }).then((response) => {
-      const responseData = response.data.user;
-      console.log(responseData);
-      const currentUser = {
-        fname: responseData.name.substr(0, responseData.name.indexOf(" ")),
-        lname: responseData.name.substr(responseData.name.indexOf(" ") + 1),
-        phone: responseData.phone,
-        address: responseData.address,
-        email: responseData.email,
-        city: responseData.city,
-        pin: responseData.pin,
-        state: responseData.state,
-      };
-      setImagePreview(
-        `https://ecommerceappcj.herokuapp.com/${responseData.image}`
-      );
-      setUser(currentUser);
     });
   };
 
   const updateUserDetails = (event) => {
     event.preventDefault();
-    console.log(user);
     axios({
       method: "patch",
       url: `https://ecommerceappcj.herokuapp.com/api/users/${props.match.params.userId}`,
       data: {
-        name: user.fname + " " + user.lname,
-        email: "work.chitransh@gmail.com",
-        phone: user.phone,
-        address: user.address,
-        city: user.city,
-        pin: user.pin,
-        state: user.state,
+        name: userDetails.fname + " " + userDetails.lname,
+        email: userDetails.email,
+        phone: userDetails.phone,
+        address: userDetails.address,
+        city: userDetails.city,
+        pin: userDetails.pin,
+        state: userDetails.state,
       },
     }).then((response) => {
       if (image) {
@@ -99,11 +61,11 @@ function Dashboard(props) {
           data: imageFormData,
         }).then(() => {
           toast.success("Personal details updated successfully!");
-          getUserInfo();
+          getUserDetails();
         });
       } else {
         toast.success("Personal details updated successfully!");
-        getUserInfo();
+        getUserDetails();
       }
     });
   };
@@ -112,7 +74,7 @@ function Dashboard(props) {
     <div className="dashboard-parent-div">
       <CategoriesSubHeader />
       <Row className="dashboard-parent-row">
-        <Sidebar image={imagePreview} />
+        <Sidebar image={imagePreview} name={userDetails.fname} />
         <Col lg={9}>
           <Card className="dashboard-form-card">
             <h6>Personal Information</h6>
@@ -132,7 +94,10 @@ function Dashboard(props) {
                   onChange={handleImageChange}
                 />
                 {imagePreview ? (
-                  <img src={imagePreview} alt={user.fname + " " + user.lname} />
+                  <img
+                    src={imagePreview}
+                    alt={userDetails.fname + " " + userDetails.lname}
+                  />
                 ) : (
                   <FaCamera className="image-pick-btn" />
                 )}
@@ -145,7 +110,7 @@ function Dashboard(props) {
                     <input
                       type="text"
                       name="fname"
-                      value={user.fname}
+                      value={userDetails.fname}
                       onChange={handleChange}
                       placeholder="First Name"
                     />
@@ -156,7 +121,7 @@ function Dashboard(props) {
                     <input
                       type="text"
                       name="lname"
-                      value={user.lname}
+                      value={userDetails.lname}
                       onChange={handleChange}
                       placeholder="Last Name"
                     />
@@ -169,7 +134,7 @@ function Dashboard(props) {
                     <input
                       type="email"
                       name="email"
-                      value={user.email}
+                      value={userDetails.email}
                       readOnly={true}
                       onChange={handleChange}
                       placeholder="Email Address"
@@ -181,7 +146,7 @@ function Dashboard(props) {
                     <input
                       type="text"
                       name="phone"
-                      value={user.phone}
+                      value={userDetails.phone}
                       onChange={handleChange}
                       placeholder="Phone Number"
                     />
@@ -194,7 +159,7 @@ function Dashboard(props) {
                     <input
                       type="text"
                       name="address"
-                      value={user.address}
+                      value={userDetails.address}
                       onChange={handleChange}
                       placeholder="Address"
                     />
@@ -205,7 +170,7 @@ function Dashboard(props) {
                     <input
                       type="text"
                       name="city"
-                      value={user.city}
+                      value={userDetails.city}
                       onChange={handleChange}
                       placeholder="City"
                     />
@@ -218,7 +183,7 @@ function Dashboard(props) {
                     <input
                       type="text"
                       name="pin"
-                      value={user.pin}
+                      value={userDetails.pin}
                       onChange={handleChange}
                       placeholder="PIN Code"
                     />
@@ -229,7 +194,7 @@ function Dashboard(props) {
                     <input
                       type="text"
                       name="state"
-                      value={user.state}
+                      value={userDetails.state}
                       onChange={handleChange}
                       placeholder="State"
                     />

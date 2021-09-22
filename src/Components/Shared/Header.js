@@ -81,7 +81,7 @@ function Header() {
                   userDetails && (
                     <div
                       onClick={() => {
-                        history.push(`/user/${userDetails._id}`);
+                        history.push(`/user/${userDetails.id}`);
                       }}
                       className="link-div"
                     >

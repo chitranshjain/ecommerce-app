@@ -31,11 +31,11 @@ function Sidebar(props) {
       <Card className="dashboard-greet-card">
         <Row>
           <Col className="greet-image-col" lg={3}>
-            <img alt="Chitransh Jain" src={props.image} />
+            <img alt={props.name} src={props.image} />
           </Col>
           <Col className="user-greet-col" lg={9}>
             <p>Hello,</p>
-            <h6>Chitransh Jain</h6>
+            <h6>{props.name}</h6>
           </Col>
         </Row>
       </Card>
