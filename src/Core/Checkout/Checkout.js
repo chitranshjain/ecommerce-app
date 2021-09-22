@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { RiAddLine, RiSubtractLine } from "react-icons/ri";
+import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import { reactLocalStorage } from "reactjs-localstorage";
 
@@ -12,6 +13,22 @@ function Checkout() {
   const [cartProducts, setCartProducts] = useState();
   const [productsCost, setProductsCost] = useState(0);
   const [user, setUser] = useState();
+  const history = useHistory();
+  const weekday = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+  const month = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
   useEffect(() => {
     getCart();
@@ -131,6 +148,78 @@ function Checkout() {
     findTotalCost(val2);
   };
 
+  const placeOrder = () => {
+    return axios({
+      method: "post",
+      url: "https://ecommerce-payment-gateway.herokuapp.com/api/",
+      data: {
+        amount: productsCost * 100,
+      },
+    }).then((response) => {
+      if (response.status === 200) {
+        return response.data.order;
+      } else {
+        toast.error("Payment failed");
+      }
+    });
+  };
+
+  const storeOrder = () => {
+    let date = new Date();
+    const day = weekday[date.getDay()];
+    const orderProducts = [];
+    cartProducts.forEach((prod) => {
+      orderProducts.push({
+        productId: prod.product._id,
+        quantity: prod.quantity,
+        total: prod.quantity * prod.product.price,
+      });
+    });
+    axios({
+      method: "post",
+      url: "https://ecommerceappcj.herokuapp.com/api/orders",
+      data: {
+        userId: user._id,
+        orderAmount: productsCost,
+        status: "placed",
+        orderedAt: `${day}, ${date.getDate()} ${
+          month[date.getMonth()]
+        } ${date.getFullYear()}`,
+        shippedAt: "Not yet shipped",
+        deliveredAt: "Not yet delivered",
+        products: orderProducts,
+      },
+    }).then(() => {
+      toast.success("Order placed successfully!");
+      reactLocalStorage.setObject("userCart", { cart: [] });
+      history.push("/");
+    });
+  };
+
+  const paymentHandler = async () => {
+    const getToken = () => {
+      placeOrder().then((data) => {
+        const options = {
+          key: "rzp_test_4ejoQixs8cAUSa",
+          name: "MERN Ecommerce",
+          description: "Thank You for shopping with us.",
+          currency: "INR",
+          order_id: data.id,
+          handler: async (response) => {
+            storeOrder();
+          },
+          theme: {
+            color: "#f1bc19",
+          },
+        };
+        const rzp1 = new window.Razorpay(options);
+        rzp1.open();
+      });
+    };
+
+    await getToken();
+  };
+
   return (
     <div className="checkout-parent-div">
       <Row className="checkout-main-row">
@@ -198,7 +287,7 @@ function Checkout() {
                   </Card>
                 );
               })}
-            <button>PROCEED TO PAY</button>
+            <button onClick={paymentHandler}>PROCEED TO PAY</button>
           </Card>
         </Col>
         <Col className="checkout-main-cols" lg={3}>

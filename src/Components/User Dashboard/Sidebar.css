@@ -49,10 +49,13 @@
     font-weight: 600;
     color: rgba(0, 0, 0, 0.4);
     transition: 0.15s ease-in;
+    text-decoration: none !important;
 }
 
 .dashboard-actions-card h5:hover {
+    color: rgba(0, 0, 0, 0.4) !important;
     color: #566fe0;
+    text-decoration: none !important;
     cursor: pointer;
 }
 

@@ -29,6 +29,7 @@ function Header() {
   const [wishlistSidebarShow, setWishlistSidebarShow] = useState(false);
   const [cartSidebarShow, setCartSidebarShow] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState();
+  const [searchQuery, setSearchQuery] = useState("");
   const history = useHistory();
 
   useEffect(() => {
@@ -45,6 +46,17 @@ function Header() {
         setAuthStatus(false);
       }
     });
+  };
+
+  const handleChange = (event) => {
+    const { value } = event.target;
+    setSearchQuery(value);
+  };
+
+  const submitSearch = (event) => {
+    if (event.key === "Enter") {
+      history.push(`/search/${searchQuery}`);
+    }
   };
 
   return (
@@ -76,7 +88,14 @@ function Header() {
             </Link>
             <div className="header-search-bar">
               <RiSearchLine className="icon" />
-              <input type="text" name="search" placeholder="Search" />
+              <input
+                type="text"
+                name="search"
+                placeholder="Search"
+                value={searchQuery}
+                onChange={handleChange}
+                onKeyPress={submitSearch}
+              />
             </div>
           </div>
           <div className="header-links-div">

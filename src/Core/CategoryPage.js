@@ -29,7 +29,7 @@ function CategoryPage(props) {
       <CategoriesSubHeader />
       <div className="category-page-main">
         <Row className="category-page-row">
-          <Col className="category-page-filters-col" lg={2}>
+          {/* <Col className="category-page-filters-col" lg={2}>
             <Card className="category-page-filters-card">
               <h4>Filters</h4>
               <hr />
@@ -72,8 +72,8 @@ function CategoryPage(props) {
                 label="Price - Low To High"
               />
             </Card>
-          </Col>
-          <Col className="category-page-products-col" lg={10}>
+          </Col> */}
+          <Col className="category-page-products-col" lg={12}>
             {category && (
               <Card className="category-page-products-card">
                 <h5>{category.name}</h5>

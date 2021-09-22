@@ -8,6 +8,7 @@ import "./Sidebar.css";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 function Sidebar(props) {
   const auth = getAuth();
@@ -48,14 +49,16 @@ function Sidebar(props) {
           </Col>
         </Row>
         <hr />
-        <Row className="dashboard-action-row">
-          <Col className="action-icon-col" lg={3}>
-            <IoIosWallet className="action-icon" />
-          </Col>
-          <Col className="action-text-col" lg={9}>
-            <h5>My Orders</h5>
-          </Col>
-        </Row>
+        <Link className="dummy-link" to="/orders">
+          <Row className="dashboard-action-row">
+            <Col className="action-icon-col" lg={3}>
+              <IoIosWallet className="action-icon" />
+            </Col>
+            <Col className="action-text-col" lg={9}>
+              <h5>My Orders</h5>
+            </Col>
+          </Row>
+        </Link>
         <hr />
         <Row onClick={logOut} className="dashboard-action-row">
           <Col className="action-icon-col" lg={3}>
