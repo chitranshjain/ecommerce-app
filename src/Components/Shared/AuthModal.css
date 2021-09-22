@@ -144,3 +144,57 @@
     color: #566fe0;
     cursor: pointer;
 }
+
+@media screen and (max-width : 576px) {
+    .modal-content,
+    .modal-dialog {
+        border-radius: 0;
+        border: none;
+        width: 536px;
+    }
+}
+
+@media screen and (max-width : 540px) {
+    .modal-content,
+    .modal-dialog {
+        border-radius: 0;
+        border: none;
+        width: 490px;
+    }
+}
+
+@media screen and (max-width : 500px) {
+    .modal-content,
+    .modal-dialog {
+        border-radius: 0;
+        border: none;
+        width: 440px;
+    }
+}
+
+@media screen and (max-width : 455px) {
+    .modal-content,
+    .modal-dialog {
+        border-radius: 0;
+        border: none;
+        width: 400px;
+    }
+}
+
+@media screen and (max-width : 410px) {
+    .modal-content,
+    .modal-dialog {
+        border-radius: 0;
+        border: none;
+        width: 360px;
+    }
+}
+
+@media screen and (max-width : 375px) {
+    .modal-content,
+    .modal-dialog {
+        border-radius: 0;
+        border: none;
+        width: 320px;
+    }
+}

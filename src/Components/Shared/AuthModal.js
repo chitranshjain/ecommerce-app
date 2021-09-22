@@ -105,7 +105,7 @@ function AuthModal(props) {
         <ToastContainer position="bottom-center" />
         {loginMode ? (
           <Row className="auth-modal-row">
-            <Col className="auth-modal-info-col" lg={5}>
+            <Col className="auth-modal-info-col hidden-md" lg={5}>
               <div className="auth-info-div">
                 <h5>Login</h5>
                 <p>Get access to your Orders and Wishlist.</p>
@@ -172,7 +172,7 @@ function AuthModal(props) {
           </Row>
         ) : (
           <Row className="auth-modal-row">
-            <Col className="auth-modal-info-col" lg={5}>
+            <Col className="auth-modal-info-col hidden-md" lg={5}>
               <div className="auth-info-div">
                 <h5>Looks like you're new here!</h5>
                 <p>Sign up with your email to get started.</p>
