@@ -27,17 +27,17 @@ function CartSidebar(props) {
               return (
                 <Card className="cart-product-card">
                   <Row className="cart-row">
-                    <Col className="cart-image-col" lg={3}>
+                    <Col className="cart-image-col" lg={3} md={3} sm={3} xs={3}>
                       <img
                         src={`https://ecommerceappcj.herokuapp.com/${prod.product.image}`}
                         alt={prod.product.name}
                       />
                     </Col>
-                    <Col className="cart-content-col" lg={9}>
+                    <Col className="cart-content-col" lg={9} md={9} sm={9} xs={9}>
                       <h6>{prod.product.name}</h6>
                       <p>Rs. {prod.product.price}/-</p>
                       <Row className="cart-product-card-row">
-                        <Col className="cart-product-card-col" lg={2}>
+                        <Col className="cart-product-card-col" lg={2} md={2} sm={2} xs={2}>
                           <RiAddLine
                             onClick={() => {
                               increaseQuantity(prod.product._id, index);
@@ -45,10 +45,10 @@ function CartSidebar(props) {
                             className="cart-quantity-button"
                           />
                         </Col>
-                        <Col className="cart-product-card-col" lg={2}>
+                        <Col className="cart-product-card-col" lg={2} md={2} sm={2} xs={2}>
                           {prod.quantity}
                         </Col>
-                        <Col className="cart-product-card-col" lg={2}>
+                        <Col className="cart-product-card-col" lg={2} md={2} sm={2} xs={2}>
                           <RiSubtractLine
                             onClick={() => {
                               decreaseQuantity(prod.product._id, index);

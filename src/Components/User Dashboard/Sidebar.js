@@ -30,41 +30,43 @@ function Sidebar(props) {
     <Col lg={3}>
       <Card className="dashboard-greet-card">
         <Row>
-          <Col className="greet-image-col" lg={3}>
+          <Col className="greet-image-col" lg={3} md={3} sm={3} xs={3}>
             <img alt={props.name} src={props.image} />
           </Col>
-          <Col className="user-greet-col" lg={9}>
+          <Col className="user-greet-col" lg={9} md={9} sm={9} xs={9}>
             <p>Hello,</p>
             <h6>{props.name}</h6>
           </Col>
         </Row>
       </Card>
       <Card className="dashboard-actions-card">
-        <Row className="dashboard-action-row">
-          <Col className="action-icon-col" lg={3}>
-            <FaUserAlt className="action-icon" />
-          </Col>
-          <Col className="action-text-col" lg={9}>
-            <h5>Account Settings</h5>
-          </Col>
-        </Row>
+        <Link className="dummy-link" to={`/user/${props.id}`}>
+          <Row className="dashboard-action-row">
+            <Col className="action-icon-col" lg={3} md={3} sm={3} xs={3}>
+              <FaUserAlt className="action-icon" />
+            </Col>
+            <Col className="action-text-col" lg={9} md={9} sm={9} xs={9}>
+              <h5>Account Settings</h5>
+            </Col>
+          </Row>
+        </Link>
         <hr />
         <Link className="dummy-link" to="/orders">
           <Row className="dashboard-action-row">
-            <Col className="action-icon-col" lg={3}>
+            <Col className="action-icon-col" lg={3} md={3} sm={3} xs={3}>
               <IoIosWallet className="action-icon" />
             </Col>
-            <Col className="action-text-col" lg={9}>
+            <Col className="action-text-col" lg={9} md={9} sm={9} xs={9}>
               <h5>My Orders</h5>
             </Col>
           </Row>
         </Link>
         <hr />
         <Row onClick={logOut} className="dashboard-action-row">
-          <Col className="action-icon-col" lg={3}>
+          <Col className="action-icon-col" lg={3} md={3} sm={3} xs={3}>
             <IoIosPower className="action-icon" />
           </Col>
-          <Col className="action-text-col" lg={9}>
+          <Col className="action-text-col" lg={9} md={9} sm={9} xs={9}>
             <h5>Log Out</h5>
           </Col>
         </Row>

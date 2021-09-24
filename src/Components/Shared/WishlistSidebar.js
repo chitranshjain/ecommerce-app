@@ -26,13 +26,13 @@ function WishlistSidebar(props) {
             return (
               <Card className="wishlist-product-card">
                 <Row className="wishlist-row">
-                  <Col className="wishlist-image-col" lg={3}>
+                  <Col className="wishlist-image-col" lg={3} md={3} sm={3} xs={3}>
                     <img
                       src={`https://ecommerceappcj.herokuapp.com/${product.image}`}
                       alt={product.name}
                     />
                   </Col>
-                  <Col className="wishlist-content-col" lg={9}>
+                  <Col className="wishlist-content-col" lg={9} md={9} sm={9} xs={9}>
                     <h6>{product.name}</h6>
                     <p>Rs. {product.price}/-</p>
                     <button

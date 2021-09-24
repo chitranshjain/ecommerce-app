@@ -74,7 +74,11 @@ function Dashboard(props) {
     <div className="dashboard-parent-div">
       <CategoriesSubHeader />
       <Row className="dashboard-parent-row">
-        <Sidebar image={imagePreview} name={userDetails.fname} />
+        <Sidebar
+          image={imagePreview}
+          name={userDetails.fname}
+          id={userDetails.id}
+        />
         <Col lg={9}>
           <Card className="dashboard-form-card">
             <h6>Personal Information</h6>

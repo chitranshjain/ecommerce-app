@@ -153,27 +153,27 @@ function BuyNow(props) {
               <hr />
               <Card className="checkout-product-card">
                 <Row className="checkout-card-row">
-                  <Col className="checkout-card-image-col" lg={2}>
+                  <Col className="checkout-card-image-col" lg={2} md={2} sm={3} xs={3}>
                     <img
                       src={`https://ecommerceappcj.herokuapp.com/${product.image}`}
                       alt={product.name}
                     />
                   </Col>
-                  <Col className="checkout-card-content-col" lg={10}>
+                  <Col className="checkout-card-content-col" lg={10} md={10} sm={9} xs={9}>
                     <h5>{product.name}</h5>
                     <p>Cost : {product.price}</p>
                     <p>Total Cost : {product.price * product.quantity}</p>
                     <Row className="checkout-product-card-row">
-                      <Col className="checkout-product-card-col" lg={2}>
+                      <Col className="checkout-product-card-col" lg={2} md={2} sm={4} xs={4}>
                         <RiAddLine
                           onClick={increaseQuantity}
                           className="checkout-quantity-button"
                         />
                       </Col>
-                      <Col className="checkout-product-card-col" lg={2}>
+                      <Col className="checkout-product-card-col" lg={2} md={2} sm={4} xs={4}>
                         {product.quantity}
                       </Col>
-                      <Col className="checkout-product-card-col" lg={2}>
+                      <Col className="checkout-product-card-col" lg={2} md={2} sm={4} xs={4}>
                         <RiSubtractLine
                           onClick={decreaseQuantity}
                           className="checkout-quantity-button"

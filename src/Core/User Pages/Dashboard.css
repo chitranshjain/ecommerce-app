@@ -10,3 +10,43 @@
     font-weight: 600;
     font-size: 17px;
 }
+
+@media screen and (max-width: 990px) {
+    .dashboard-parent-row {
+        margin: 0 60px;
+    }
+
+    .dashboard-form-card {
+        padding: 10px 20px;
+    }
+
+    .registration-form-div {
+        margin: 16px 0px;
+    }
+
+    .registration-input-div {
+        padding: 0 4px;
+    }
+
+    .register-button {
+        margin: 0 !important;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .dashboard-parent-row {
+        margin: 0 20px;
+    }
+
+    .register-button {
+        margin: 0 !important;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .dashboard-parent-row {
+        margin: 0 10px;
+    }
+}

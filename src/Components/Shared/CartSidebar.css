@@ -119,3 +119,19 @@
     color: #fff;
     font-weight: 600;
 }
+
+@media screen and (max-width: 576px) {
+
+    .cart-image-col img {
+        height: 75px;
+        width: 80px;
+    }
+
+    .cart-content-col h6 {
+        font-size: 14px;
+    }
+
+    .cart-content-col p {
+        font-size: 12px;
+    }
+}

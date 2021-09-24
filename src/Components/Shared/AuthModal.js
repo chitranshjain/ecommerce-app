@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Col, Modal, Row } from "react-bootstrap";
 import authh from "../../Assets/auth.svg";
 import auth2 from "../../Assets/auth2.svg";
@@ -17,8 +17,10 @@ import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import { useHistory } from "react-router";
 import { reactLocalStorage } from "reactjs-localstorage";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 function AuthModal(props) {
+  const { getUserDetails } = useContext(AuthContext);
   const [passwordShow, setPasswordShow] = useState(false);
   const [loginMode, setLoginMode] = useState(true);
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -44,6 +46,17 @@ function AuthModal(props) {
               };
 
               reactLocalStorage.setObject("loggedInUser", loggedInUser);
+              getUserDetails();
+
+              const wishlist = reactLocalStorage.getObject("userWishlist");
+              if (!wishlist) {
+                reactLocalStorage.setObject("userWishlist", { wishlist: [] });
+              }
+
+              const cart = reactLocalStorage.getObject("userCart");
+              if (!cart) {
+                reactLocalStorage.setObject("userCart", { cart: [] });
+              }
 
               history.push("/");
               props.onHide();

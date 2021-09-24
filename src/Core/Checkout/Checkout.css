@@ -13,7 +13,8 @@
 }
 
 .checkout-products-card,
-.checkout-cost-card, .checkout-user-card {
+.checkout-cost-card,
+.checkout-user-card {
     padding: 16px;
     border-radius: 0;
 }
@@ -115,4 +116,72 @@
     color: #fff;
     background-color: #fb641b;
     margin-top: 6px;
+}
+
+@media screen and (max-width: 990px) {
+
+    .checkout-card-image-col img {
+        height: 70px;
+        width: 70px;
+    }
+
+    .checkout-card-content-col h5 {
+        font-size: 14px;
+    }
+
+    .checkout-quantity-button {
+        font-size: 14px;
+    }
+
+    .checkout-product-card-col {
+        font-size: 14px;
+    }
+
+    .checkout-product-card {
+        padding: 8px;
+    }
+
+    .checkout-card-content-col p {
+        font-size: 12px;
+    }
+
+    .checkout-main-row {
+        padding: 20px 20px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+
+    .checkout-card-image-col img {
+        height: 50px;
+        width: 50px;
+    }
+
+    .checkout-card-content-col h5 {
+        font-size: 14px;
+    }
+
+    .checkout-quantity-button {
+        font-size: 14px;
+    }
+
+    .checkout-product-card-col {
+        font-size: 14px;
+    }
+
+    .checkout-product-card {
+        padding: 8px;
+    }
+
+    .checkout-card-content-col p {
+        font-size: 12px;
+    }
+
+    .checkout-main-row {
+        padding: 10px 10px;
+    }
+
+    .checkout-product-card-col button {
+        font-size: 12px;
+    }
 }

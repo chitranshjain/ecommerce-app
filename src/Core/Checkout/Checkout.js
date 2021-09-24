@@ -232,18 +232,36 @@ function Checkout() {
                 return (
                   <Card className="checkout-product-card">
                     <Row className="checkout-card-row">
-                      <Col className="checkout-card-image-col" lg={2}>
+                      <Col
+                        className="checkout-card-image-col"
+                        lg={2}
+                        md={2}
+                        sm={3}
+                        xs={3}
+                      >
                         <img
                           src={`https://ecommerceappcj.herokuapp.com/${prod.product.image}`}
                           alt={prod.product.name}
                         />
                       </Col>
-                      <Col className="checkout-card-content-col" lg={10}>
+                      <Col
+                        className="checkout-card-content-col"
+                        lg={10}
+                        md={10}
+                        sm={9}
+                        xs={9}
+                      >
                         <h5>{prod.product.name}</h5>
                         <p>Cost : {prod.product.price}</p>
                         <p>Total Cost : {prod.product.price * prod.quantity}</p>
                         <Row className="checkout-product-card-row">
-                          <Col className="checkout-product-card-col" lg={2}>
+                          <Col
+                            className="checkout-product-card-col"
+                            lg={2}
+                            md={4}
+                            sm={4}
+                            xs={4}
+                          >
                             <RiAddLine
                               onClick={() => {
                                 increaseQuantity(prod.product._id, index);
@@ -251,10 +269,22 @@ function Checkout() {
                               className="checkout-quantity-button"
                             />
                           </Col>
-                          <Col className="checkout-product-card-col" lg={2}>
+                          <Col
+                            className="checkout-product-card-col"
+                            lg={2}
+                            md={4}
+                            sm={4}
+                            xs={4}
+                          >
                             {prod.quantity}
                           </Col>
-                          <Col className="checkout-product-card-col" lg={2}>
+                          <Col
+                            className="checkout-product-card-col"
+                            lg={2}
+                            md={4}
+                            sm={4}
+                            xs={4}
+                          >
                             <RiSubtractLine
                               onClick={() => {
                                 decreaseQuantity(prod.product._id, index);
@@ -262,7 +292,7 @@ function Checkout() {
                               className="checkout-quantity-button"
                             />
                           </Col>
-                          <Col className="checkout-product-card-col" lg={3}>
+                          <Col className="checkout-product-card-col" lg={3} md={6} sm={6} xs={6}>
                             <button
                               style={{ backgroundColor: "#ff9f00" }}
                               onClick={() => {
@@ -272,7 +302,7 @@ function Checkout() {
                               REMOVE ITEM
                             </button>
                           </Col>
-                          <Col className="checkout-product-card-col" lg={3}>
+                          <Col className="checkout-product-card-col" lg={3} md={6} sm={6} xs={6}>
                             <button
                               onClick={() => {
                                 addToWishlist(prod.product._id);

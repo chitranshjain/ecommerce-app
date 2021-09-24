@@ -94,3 +94,9 @@
     color: #fff;
     background-color: #fb641b;
 }
+
+@media screen and (max-width: 576px) {
+    .registration-parent-div {
+        padding: 10px 20px;
+    }
+}
