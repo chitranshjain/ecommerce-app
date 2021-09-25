@@ -49,13 +49,11 @@ function AuthModal(props) {
               getUserDetails();
 
               const wishlist = reactLocalStorage.getObject("userWishlist");
-              console.log(wishlist.wishlist);
               if (!wishlist.wishlist) {
                 reactLocalStorage.setObject("userWishlist", { wishlist: [] });
               }
 
               const cart = reactLocalStorage.getObject("userCart");
-              console.log(cart.cart);
               if (!cart.cart) {
                 reactLocalStorage.setObject("userCart", { cart: [] });
               }
