@@ -5,6 +5,7 @@ import SimilarProductsCarousel from "../Components/ProductPage/SimilarProductsCa
 
 import CategoriesSubHeader from "../Components/Shared/CategoriesSubHeader";
 import "./ProductPage.css";
+import $ from "jquery";
 
 function ProductPage(props) {
   const [product, setProduct] = useState();
@@ -13,6 +14,12 @@ function ProductPage(props) {
   useEffect(() => {
     getProduct();
   }, [props]);
+
+  useEffect(() => {
+    $(document).ready(function () {
+      $(this).scrollTop(0);
+    });
+  }, []);
 
   const getProduct = () => {
     setProduct();

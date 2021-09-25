@@ -10,6 +10,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { useHistory } from "react-router";
+import $ from "jquery";
 
 function Registration(props) {
   const [user, setUser] = useState({
@@ -28,6 +29,12 @@ function Registration(props) {
   const imageButtonRef = useRef();
   const types = ["image/png", "image/jpeg", "image/jpg"];
   const history = useHistory();
+
+  useEffect(() => {
+    $(document).ready(function () {
+      $(this).scrollTop(0);
+    });
+  }, []);
 
   function handleImageChange(event) {
     let selectedFile = event.target.files[0];

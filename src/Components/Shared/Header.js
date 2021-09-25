@@ -116,15 +116,17 @@ function Header() {
                   <RiHeart3Line className="link-icon" />
                   <p>Wishlist</p>
                 </div>
-                <div
-                  onClick={() => {
-                    setCartSidebarShow((prev) => !prev);
-                  }}
-                  className="link-div"
-                >
-                  <RiShoppingBagLine className="link-icon" />
-                  <p>Cart</p>
-                </div>
+                {authStatus && (
+                  <div
+                    onClick={() => {
+                      setCartSidebarShow((prev) => !prev);
+                    }}
+                    className="link-div"
+                  >
+                    <RiShoppingBagLine className="link-icon" />
+                    <p>Cart</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

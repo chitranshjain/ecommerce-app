@@ -3,8 +3,9 @@ import axios from "axios";
 
 import "./CategoryPage.css";
 import CategoriesSubHeader from "../Components/Shared/CategoriesSubHeader";
-import { Card, Col, Form, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import ProductCard from "../Components/CategoryPage/ProductCard";
+import $ from "jquery";
 
 function CategoryPage(props) {
   const categoryId = props.match.params.categoryId;
@@ -13,6 +14,12 @@ function CategoryPage(props) {
   useEffect(() => {
     getCategory();
   }, [props]);
+
+  useEffect(() => {
+    $(document).ready(function () {
+      $(this).scrollTop(0);
+    });
+  }, []);
 
   const getCategory = () => {
     setCategory();

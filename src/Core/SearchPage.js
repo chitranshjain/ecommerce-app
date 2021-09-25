@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import ProductCard from "../Components/CategoryPage/ProductCard";
+import $ from "jquery";
 
 import "./SearchPage.css";
 
@@ -12,6 +13,12 @@ function SearchPage(props) {
   useEffect(() => {
     getProducts();
   }, [props]);
+
+  useEffect(() => {
+    $(document).ready(function () {
+      $(this).scrollTop(0);
+    });
+  }, []);
 
   const getProducts = () => {
     axios({

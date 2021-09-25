@@ -5,6 +5,7 @@ import { reactLocalStorage } from "reactjs-localstorage";
 import { Card, Col, Row } from "react-bootstrap";
 import { RiAddLine, RiSubtractLine } from "react-icons/ri";
 import { useHistory } from "react-router";
+import $ from "jquery";
 
 function BuyNow(props) {
   const [product, setProduct] = useState();
@@ -30,6 +31,12 @@ function BuyNow(props) {
     getProduct();
     getUserInfo();
   }, [props]);
+
+  useEffect(() => {
+    $(document).ready(function () {
+      $(this).scrollTop(0);
+    });
+  }, []);
 
   const getUserInfo = () => {
     const user = reactLocalStorage.getObject("loggedInUser");

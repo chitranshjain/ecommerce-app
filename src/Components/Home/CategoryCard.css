@@ -41,3 +41,15 @@
 .category-cards-div a:hover img {
     transform: scale(1.1);
 }
+
+@media screen and (max-width: 990px) {
+    .home-category-card {
+        height: 80px !important;
+        width: 80px !important;
+    }
+
+    .home-category-card p {
+        font-size: 12px;
+        text-align: center;
+    }
+}

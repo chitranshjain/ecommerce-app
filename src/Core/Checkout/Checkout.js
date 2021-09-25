@@ -5,6 +5,7 @@ import { RiAddLine, RiSubtractLine } from "react-icons/ri";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import { reactLocalStorage } from "reactjs-localstorage";
+import $ from "jquery";
 
 import "./Checkout.css";
 
@@ -34,6 +35,12 @@ function Checkout() {
     getCart();
     getCartItems();
     getUserInfo();
+  }, []);
+
+  useEffect(() => {
+    $(document).ready(function () {
+      $(this).scrollTop(0);
+    });
   }, []);
 
   const getUserInfo = () => {
@@ -292,7 +299,13 @@ function Checkout() {
                               className="checkout-quantity-button"
                             />
                           </Col>
-                          <Col className="checkout-product-card-col" lg={3} md={6} sm={6} xs={6}>
+                          <Col
+                            className="checkout-product-card-col"
+                            lg={3}
+                            md={6}
+                            sm={6}
+                            xs={6}
+                          >
                             <button
                               style={{ backgroundColor: "#ff9f00" }}
                               onClick={() => {
@@ -302,7 +315,13 @@ function Checkout() {
                               REMOVE ITEM
                             </button>
                           </Col>
-                          <Col className="checkout-product-card-col" lg={3} md={6} sm={6} xs={6}>
+                          <Col
+                            className="checkout-product-card-col"
+                            lg={3}
+                            md={6}
+                            sm={6}
+                            xs={6}
+                          >
                             <button
                               onClick={() => {
                                 addToWishlist(prod.product._id);
@@ -317,7 +336,9 @@ function Checkout() {
                   </Card>
                 );
               })}
-            <button onClick={paymentHandler}>PROCEED TO PAY</button>
+            {cartProducts.length > 0 && (
+              <button onClick={paymentHandler}>PROCEED TO PAY</button>
+            )}
           </Card>
         </Col>
         <Col className="checkout-main-cols" lg={3}>

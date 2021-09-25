@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { reactLocalStorage } from "reactjs-localstorage";
+import $ from "jquery";
 
 import "./Orders.css";
 
@@ -10,6 +11,12 @@ function Orders() {
 
   useEffect(() => {
     getOrders();
+  }, []);
+
+  useEffect(() => {
+    $(document).ready(function () {
+      $(this).scrollTop(0);
+    });
   }, []);
 
   const getOrders = () => {
@@ -115,12 +122,24 @@ function Orders() {
                       <strong>Quantity</strong>
                     </p>
                   </Col>
-                  <Col className="hidden-sm hidden-xs" lg={1} md={2} sm={0} xs={0}>
+                  <Col
+                    className="hidden-sm hidden-xs"
+                    lg={1}
+                    md={2}
+                    sm={0}
+                    xs={0}
+                  >
                     <p>
                       <strong>Price</strong>
                     </p>
                   </Col>
-                  <Col className="hidden-sm hidden-xs" lg={1} md={2} sm={0} xs={0}>
+                  <Col
+                    className="hidden-sm hidden-xs"
+                    lg={1}
+                    md={2}
+                    sm={0}
+                    xs={0}
+                  >
                     <p>
                       <strong>Total Cost</strong>
                     </p>
@@ -136,10 +155,22 @@ function Orders() {
                         <Col lg={1} md={2} sm={3} xs={3}>
                           <p>{prod.quantity}</p>
                         </Col>
-                        <Col className="hidden-sm hidden-xs" lg={1} md={2} sm={0} xs={0}>
+                        <Col
+                          className="hidden-sm hidden-xs"
+                          lg={1}
+                          md={2}
+                          sm={0}
+                          xs={0}
+                        >
                           <p>Rs. {prod.productId.price}</p>
                         </Col>
-                        <Col className="hidden-sm hidden-xs" lg={1} md={2} sm={0} xs={0}>
+                        <Col
+                          className="hidden-sm hidden-xs"
+                          lg={1}
+                          md={2}
+                          sm={0}
+                          xs={0}
+                        >
                           <p>Rs. {prod.total}</p>
                         </Col>
                       </Row>

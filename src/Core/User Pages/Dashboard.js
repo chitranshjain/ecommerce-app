@@ -4,12 +4,11 @@ import CategoriesSubHeader from "../../Components/Shared/CategoriesSubHeader";
 
 import "./Dashboard.css";
 import Sidebar from "../../Components/User Dashboard/Sidebar";
-import { useHistory } from "react-router";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { reactLocalStorage } from "reactjs-localstorage";
 import { FaCamera } from "react-icons/fa";
 import { AuthContext } from "../../Contexts/AuthContext";
+import $ from "jquery";
 
 function Dashboard(props) {
   const { userDetails, userImagePreview, getUserDetails, setUserDetails } =
@@ -18,6 +17,12 @@ function Dashboard(props) {
   const [image, setImage] = useState(null);
   const imageButtonRef = useRef();
   const types = ["image/png", "image/jpeg", "image/jpg"];
+
+  useEffect(() => {
+    $(document).ready(function () {
+      $(this).scrollTop(0);
+    });
+  }, []);
 
   function handleImageChange(event) {
     let selectedFile = event.target.files[0];

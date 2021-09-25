@@ -7,9 +7,11 @@ import { BsHeart, BsHeartFill } from "react-icons/bs";
 import "./ProductMainCard.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthContext";
+import { toast } from "react-toastify";
 
 function ProductMainCard(props) {
   const {
+    authStatus,
     wishlist,
     cart,
     addToWishlist,
@@ -37,7 +39,11 @@ function ProductMainCard(props) {
               <BsHeart
                 onClick={(e) => {
                   e.preventDefault();
-                  addToWishlist(props.product._id);
+                  if (authStatus) {
+                    addToWishlist(props.product._id);
+                  } else {
+                    toast.error("You need to login first.");
+                  }
                 }}
                 className="unliked-icon wishlist-icon"
               />
@@ -48,7 +54,12 @@ function ProductMainCard(props) {
             />
           </div>
           <Row>
-            <Col lg={6} md={6} sm={12} className="product-page-button-col cart-btn">
+            <Col
+              lg={6}
+              md={6}
+              sm={12}
+              className="product-page-button-col cart-btn"
+            >
               {cart &&
               cart.length > 0 &&
               cart.find((prod) => prod.productId === props.product._id) ? (
@@ -65,7 +76,11 @@ function ProductMainCard(props) {
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    addToCart(props.product._id);
+                    if (authStatus) {
+                      addToCart(props.product._id);
+                    } else {
+                      toast.error("You need to login first.");
+                    }
                   }}
                 >
                   <RiShoppingCart2Fill className="icon" />
@@ -73,7 +88,12 @@ function ProductMainCard(props) {
                 </button>
               )}
             </Col>
-            <Col lg={6} md={6} sm={12} className="product-page-button-col buy-btn">
+            <Col
+              lg={6}
+              md={6}
+              sm={12}
+              className="product-page-button-col buy-btn"
+            >
               <button>
                 <Link
                   className="dummy-link"

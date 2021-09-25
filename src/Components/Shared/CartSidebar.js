@@ -7,8 +7,13 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthContext";
 
 function CartSidebar(props) {
-  const { cartProducts, removeFromCart, increaseQuantity, decreaseQuantity } =
-    useContext(AuthContext);
+  const {
+    cartProducts,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
+    authStatus,
+  } = useContext(AuthContext);
 
   return (
     <Offcanvas
@@ -33,11 +38,23 @@ function CartSidebar(props) {
                         alt={prod.product.name}
                       />
                     </Col>
-                    <Col className="cart-content-col" lg={9} md={9} sm={9} xs={9}>
+                    <Col
+                      className="cart-content-col"
+                      lg={9}
+                      md={9}
+                      sm={9}
+                      xs={9}
+                    >
                       <h6>{prod.product.name}</h6>
                       <p>Rs. {prod.product.price}/-</p>
                       <Row className="cart-product-card-row">
-                        <Col className="cart-product-card-col" lg={2} md={2} sm={2} xs={2}>
+                        <Col
+                          className="cart-product-card-col"
+                          lg={2}
+                          md={2}
+                          sm={2}
+                          xs={2}
+                        >
                           <RiAddLine
                             onClick={() => {
                               increaseQuantity(prod.product._id, index);
@@ -45,10 +62,22 @@ function CartSidebar(props) {
                             className="cart-quantity-button"
                           />
                         </Col>
-                        <Col className="cart-product-card-col" lg={2} md={2} sm={2} xs={2}>
+                        <Col
+                          className="cart-product-card-col"
+                          lg={2}
+                          md={2}
+                          sm={2}
+                          xs={2}
+                        >
                           {prod.quantity}
                         </Col>
-                        <Col className="cart-product-card-col" lg={2} md={2} sm={2} xs={2}>
+                        <Col
+                          className="cart-product-card-col"
+                          lg={2}
+                          md={2}
+                          sm={2}
+                          xs={2}
+                        >
                           <RiSubtractLine
                             onClick={() => {
                               decreaseQuantity(prod.product._id, index);
@@ -69,9 +98,11 @@ function CartSidebar(props) {
               );
             })}
         </div>
-        <Link onClick={props.handleClose} to="/checkout">
-          <button>PROCEED TO CHECKOUT</button>
-        </Link>
+        {authStatus && cartProducts.length > 0 && (
+          <Link onClick={props.handleClose} to="/checkout">
+            <button>PROCEED TO CHECKOUT</button>
+          </Link>
+        )}
       </Offcanvas.Body>
     </Offcanvas>
   );
