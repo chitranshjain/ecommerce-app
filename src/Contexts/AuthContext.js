@@ -58,6 +58,17 @@ export const AuthProvider = (props) => {
       setUserImagePreview(
         `https://ecommerceappcj.herokuapp.com/${responseData.image}`
       );
+
+      const wishlist = reactLocalStorage.getObject("userWishlist");
+      if (!wishlist.wishlist) {
+        reactLocalStorage.setObject("userWishlist", { wishlist: [] });
+      }
+
+      const cart = reactLocalStorage.getObject("userCart");
+      if (!cart.cart) {
+        reactLocalStorage.setObject("userCart", { cart: [] });
+      }
+
       setUserDetails(currentUser);
     });
   };
@@ -126,7 +137,7 @@ export const AuthProvider = (props) => {
 
   const increaseQuantity = (productId, index) => {
     const val2 = [...cartProducts];
-    if (val2[index].productId.stockQuantity < val2[index].quantity) {
+    if (val2[index].product.stockQuantity > val2[index].quantity) {
       val2[index].quantity = val2[index].quantity + 1;
       setCartProducts(val2);
     } else {
@@ -188,6 +199,8 @@ export const AuthProvider = (props) => {
       return [...prev, productId];
     });
 
+    console.log("WISHLIST");
+    console.log(wishlist);
     const values = [...wishlist];
     values.push(productId);
     const list = {

@@ -71,6 +71,7 @@ function AuthModal(props) {
         }
       })
       .catch((err) => {
+        toast.error("ERROR : " + err.message)
         console.log(err.code + " " + err.message);
       });
   };
@@ -90,6 +91,7 @@ function AuthModal(props) {
         });
       })
       .catch((err) => {
+        toast.error("ERROR : " + err.message)
         console.log(err.code + " " + err.message);
       });
   };
