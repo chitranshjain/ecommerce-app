@@ -26,6 +26,7 @@ function Orders() {
       method: "get",
       url: `https://ecommerceappcj.herokuapp.com/api/orders/${userId}`,
     }).then((response) => {
+      console.log(response.data.orders);
       setOrders(response.data.orders);
     });
   };
@@ -33,7 +34,7 @@ function Orders() {
   return (
     <div className="orders-parent-div">
       <Card>
-        {orders &&
+        {orders && orders.length > 0 ? (orders.length != 0 &&
           orders.map((order) => {
             return (
               <Card className="order-card">
@@ -101,10 +102,10 @@ function Orders() {
                         {order.status === "placed"
                           ? "Placed"
                           : order.status === "shipped"
-                          ? "Shipped"
-                          : order.status === "delivered"
-                          ? "Delivered"
-                          : "Cancelled"}
+                            ? "Shipped"
+                            : order.status === "delivered"
+                              ? "Delivered"
+                              : "Cancelled"}
                       </Col>
                     </Row>
                   </Col>
@@ -178,7 +179,7 @@ function Orders() {
                   })}
               </Card>
             );
-          })}
+          })) : <center><p>No orders placed</p></center>}
       </Card>
     </div>
   );
