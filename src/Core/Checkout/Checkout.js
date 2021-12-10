@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { RiAddLine, RiSubtractLine } from "react-icons/ri";
 import { useHistory } from "react-router";
@@ -8,8 +8,10 @@ import { reactLocalStorage } from "reactjs-localstorage";
 import $ from "jquery";
 
 import "./Checkout.css";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 function Checkout() {
+  const {userImagePreview} = useContext(AuthContext)
   const [cart, setCart] = useState([]);
   const [cartProducts, setCartProducts] = useState();
   const [productsCost, setProductsCost] = useState(0);
@@ -336,7 +338,7 @@ function Checkout() {
                   </Card>
                 );
               })}
-            {cartProducts.length > 0 && (
+            {cartProducts && cartProducts.length > 0 && (
               <button onClick={paymentHandler}>PROCEED TO PAY</button>
             )}
           </Card>
@@ -356,11 +358,11 @@ function Checkout() {
                 <Col className="greet-image-col" lg={3}>
                   <img
                     alt="Chitransh Jain"
-                    src={`https://ecommerceappcj.herokuapp.com/${user.image}`}
+                    src={userImagePreview}
                   />
                 </Col>
                 <Col className="user-greet-col" lg={9}>
-                  <h6>Chitransh Jain</h6>
+                  <h6>{user.name}</h6>
                   <p>{user.address}</p>
                 </Col>
               </Row>
